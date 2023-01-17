@@ -1,10 +1,10 @@
 
 local Tile = Class("Tile")
 
-function Tile:init(x, y, c, w, h, name, type)
+function Tile:init(x, y, img, w, h, name, type)
     self.x = x
     self.y = y
-    self.c = c
+    self.img = img
     self.w = w
     self.h = h
     self.name = name

@@ -5,7 +5,7 @@ function Road:init(x, y)
         self, 
         x, 
         y, 
-        {174/255,174/255,174/255}, 
+        love.graphics.newImage('assets/pic/roadhor.png'),
         32,
         32,
         "Road",

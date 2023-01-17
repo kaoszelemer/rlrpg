@@ -210,10 +210,12 @@ function love.draw()
   for x = 1, GLOBALS.maxtiles do
     for y = 1, GLOBALS.maxtiles do
       
-        if cityMap[x][y].c ~= nil then
+       --[[  if cityMap[x][y].c ~= nil then
         love.graphics.setColor(cityMap[x][y].c)
         love.graphics.rectangle("fill", cityMap[x][y].x * cityMap[x][y].w, cityMap[x][y].y * cityMap[x][y].h, cityMap[x][y].w, cityMap[x][y].h)
-        end
+        end ]]
+
+        love.graphics.draw(cityMap[x][y].img, cityMap[x][y].x * cityMap[x][y].w, cityMap[x][y].y * cityMap[x][y].h)
 
         if cityMap[x][y].hovered then
             love.graphics.setColor(1,0,0)

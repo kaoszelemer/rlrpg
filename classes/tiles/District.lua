@@ -5,7 +5,7 @@ function District:init(x, y)
         self, 
         x, 
         y, 
-        {130/255,115/255,151/255}, 
+        love.graphics.newImage('assets/pic/asphalt.png'),
         32,
         32,
         "District",

@@ -5,7 +5,7 @@ function House:init(x, y)
         self, 
         x, 
         y, 
-        {82/255,73/255,97/255}, 
+        love.graphics.newImage('assets/pic/house.png'), 
         32,
         32,
         "House",

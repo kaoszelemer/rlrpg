@@ -1,11 +1,11 @@
-local Road = Tile:extend("Road")
+local Field = Tile:extend("Field")
 
-function Road:init(x, y)
+function Field:init(x, y)
     Tile.init(
         self, 
         x, 
         y, 
-        {0,1,0}, 
+        love.graphics.newImage('assets/pic/grass.png'),
         32,
         32,
         "Field",
@@ -13,4 +13,4 @@ function Road:init(x, y)
     )
 end
 
-return Road
+return Field
