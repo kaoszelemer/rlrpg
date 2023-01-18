@@ -27,7 +27,20 @@ function Cocaine:action()
 
     print("snorting coke..")
  
-   
+    if player.money >= 25 then
+    
+        if player.aliveness - 4 > 0 then
+            player.aliveness = player.aliveness - 4
+        else
+            player:showCant()
+        end
+      
+        player.energy = player.energy + 5
+      
+        player.money = player.money - 25
+    else
+        player:showCant()
+    end
     
 
 
