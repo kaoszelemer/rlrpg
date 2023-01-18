@@ -20,15 +20,25 @@ end
 
 function GoOut:action()
     print("buttonaction")
+  
+
     for k,v in ipairs(POIs) do
         if v.panelvisible then
-            v.panelvisible = false
+            
+                v.panelvisible = false
+
+        
+          
         end
     end
+
+    Button:progressBar(0.05)
     
     for i = 1, #BUTTONS do
         table.remove(BUTTONS, i)
     end
+
+    
 
 end
 

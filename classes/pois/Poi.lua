@@ -11,6 +11,7 @@ function Poi:init(x, y, c, w, h, name, type, img)
     self.type = type
     self.img = img
    
+    PoiWorld:add(self, self.x, self.y, self.w, self.h)
     
 end
 
@@ -19,6 +20,10 @@ function Poi:draw()
 
 
 
+end
+
+function Poi:action()
+ 
 end
 
 

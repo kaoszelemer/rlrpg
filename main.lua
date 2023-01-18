@@ -4,6 +4,9 @@ Lurker = require('lib.lurker')
 Bump = require('lib.bump')
 Timer = require('lib.cron')
 
+--sajat lib
+StateMachine = require('classes.StateMachine')
+
 --offset
 
 
@@ -11,25 +14,46 @@ Timer = require('lib.cron')
 
 --class require
 Tile = require('classes.tiles.Tile')
-Road = require('classes.tiles.Road')
+Roadhor = require('classes.tiles.Roadhor')
+Roadver = require('classes.tiles.Roadver')
 District = require('classes.tiles.District')
 House = require('classes.tiles.House')
 Field = require('classes.tiles.Field')
 
 Poi = require('classes.pois.Poi')
 Home = require('classes.pois.Home')
+Factory = require('classes.pois.Factory')
 
 Character = require('classes.characters.Character')
 Player = require('classes.characters.Player')
 
 Button = require('classes.buttons.Button')
 GoOut = require('classes.buttons.GoOut')
+Explore = require('classes.buttons.Explore')
+Work = require('classes.buttons.Work')
 
 
 cityMap = {}
+
 GameWorld = Bump.newWorld(64)
 PoiWorld = Bump.newWorld(64)
 MenuWorld = Bump.newWorld(64)
+
+
+playerState = StateMachine({
+    city = {
+        name = "city",
+        transitions = {"poiresolution", "city"} 
+    },
+
+    poiresolution = {
+        name = "poiresolution",
+        transitions = {"city", "poiresolution"}
+    },
+
+    },
+    "city"
+)
 
 
 
@@ -74,11 +98,11 @@ local function createMap()
     local rs = love.math.random(1, GLOBALS.maxtiles)
                       
     for x =1, GLOBALS.maxtiles do 
-        cityMap[x][rs] = Road(x,rs) 
+        cityMap[x][rs] = Roadver(x,rs) 
     end
 
     for y = 1, GLOBALS.maxtiles do 
-        cityMap[rs][y] = Road(rs, y) 
+        cityMap[rs][y] = Roadhor(rs, y) 
     end
 
 
@@ -94,19 +118,11 @@ local function createMap()
         end
     end
 
-    
-    --
-    
-    
-
-
-
-
-    
-
+    table.remove(HOUSES, 1)
 
 
 end 
+
 
 
 
@@ -116,7 +132,7 @@ local function createHomePoi()
 
     POIs[1] = Home(HOUSES[pos].x * 32, HOUSES[pos].y * 32)
 
-    PoiWorld:add(POIs[1], POIs[1].x, POIs[1].y, POIs[1].w, POIs[1].h)
+   -- PoiWorld:add(POIs[1], POIs[1].x, POIs[1].y, POIs[1].w, POIs[1].h)
     
 
 end
@@ -141,6 +157,7 @@ local function updateButtonWorld()
     local objects, len = MenuWorld:queryRect(GLOBALS.mX, GLOBALS.mY, 1,1)
         
     for i = 1, len do
+       -- print(objects[i].name)
         objects[i].hovered = true
     end
 end
@@ -151,13 +168,17 @@ function love.mousemoved(x,y)
 end
 
 function love.mousereleased()
-    for k,v in ipairs(POIs) do
-        if v.hovered then
-            v:action()
+    if playerState.state == playerState.states.city then
+        for k,v in ipairs(POIs) do
+            if v.hovered then
+                playerState:changeState(playerState.states.poiresolution)
+                v:action()
+            end
         end
     end
     for k,v in ipairs(BUTTONS) do
         if v.hovered then
+            print(v.name, "action")
             v:action()
         end
     end
@@ -171,33 +192,50 @@ function love.load()
     createMap()
     POIs = {}
     BUTTONS = {}
+    table.insert(BUTTONS, Explore(GLOBALS.scrw-280, 250))
     createHomePoi()
+    cityMap.explorationlevel = 0
 
     player = Player()
-    STARTING = true
+    
+    
 
 end
 
-function love.update()
+function love.update(dt)
     Lurker:scan()
-
+  
     for x = 1, GLOBALS.maxtiles do
         for y= 1, GLOBALS.maxtiles do
             cityMap[x][y].hovered = false
         end
     end
 
-    for k, v in ipairs(POIs) do
-        v.hovered = false
-    end
+   
 
-    for k, v in ipairs(BUTTONS) do
-        v.hovered = false
-    end
+ --   if playerState.state == playerState.states.poiresolution then
 
-    updateGameWorld()
-    updatePoiWorld()
-    updateButtonWorld()
+        for k, v in ipairs(POIs) do
+            v.hovered = false
+        end
+
+        for k, v in ipairs(BUTTONS) do
+            v.hovered = false
+        end
+
+
+        updateGameWorld()
+        updatePoiWorld()
+        updateButtonWorld()
+       
+
+        Button:update(dt)
+
+  --  end
+
+  if playerState.state == playerState.states.city and #BUTTONS == 0 then
+    table.insert(BUTTONS, Explore(GLOBALS.scrw-280, 250))
+  end
    
 
 
@@ -209,17 +247,11 @@ function love.draw()
 
   for x = 1, GLOBALS.maxtiles do
     for y = 1, GLOBALS.maxtiles do
-      
-       --[[  if cityMap[x][y].c ~= nil then
-        love.graphics.setColor(cityMap[x][y].c)
-        love.graphics.rectangle("fill", cityMap[x][y].x * cityMap[x][y].w, cityMap[x][y].y * cityMap[x][y].h, cityMap[x][y].w, cityMap[x][y].h)
-        end ]]
 
         love.graphics.draw(cityMap[x][y].img, cityMap[x][y].x * cityMap[x][y].w, cityMap[x][y].y * cityMap[x][y].h)
 
         if cityMap[x][y].hovered then
             love.graphics.setColor(1,0,0)
-        --    print(x..y, cityMap[x][y].x * cityMap[x][y].w, cityMap[x][y].y * cityMap[x][y].h)
             love.graphics.rectangle("line", (cityMap[x][y].x * cityMap[x][y].w), (cityMap[x][y].y * cityMap[x][y].h), cityMap[x][y].w, cityMap[x][y].h)
             love.graphics.setColor(1,1,1)
         end
@@ -242,6 +274,19 @@ function love.draw()
     love.graphics.print(v.name, v.x + 30, v.y + 30)
   end
 
+  Button:draw()
+
+  if playerState.state == playerState.states.city then
+    love.graphics.setFont(GLOBALS.fonts.header)
+    love.graphics.print("City", GLOBALS.scrw - 350, 10)
+    love.graphics.setFont(GLOBALS.fonts.stats)
+    love.graphics.print("Its your neigborhood.\nCrackhouses all around.\nKinda depressive.", GLOBALS.scrw - 300, 150)
+    love.graphics.print("Exploration level:"..cityMap.explorationlevel.."%", GLOBALS.scrw - 350, 50)
+  end
+  
+
+  love.graphics.print("Time\n"..GLOBALS.gameworldtime..":00",GLOBALS.scrw-100, 10)
+ 
   
 
 

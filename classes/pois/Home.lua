@@ -19,7 +19,7 @@ function Home:draw()
     love.graphics.draw(self.img, self.x, self.y)
     if self.panelvisible then
         love.graphics.setFont(GLOBALS.fonts.header)
-        love.graphics.print(self.name, GLOBALS.scrw - 200, 10)
+        love.graphics.print(self.name, GLOBALS.scrw - 350, 10)
         love.graphics.setFont(GLOBALS.fonts.stats)
 
         if self.nothingpanel then
@@ -34,6 +34,9 @@ end
 function Home:action()
 
     print("action")
+    for i = 1, #BUTTONS do
+        table.remove(BUTTONS, i)
+    end
     if self.todo == nil then
         self.nothingpanel = true
         local action = GoOut(GLOBALS.scrw-280, 250)

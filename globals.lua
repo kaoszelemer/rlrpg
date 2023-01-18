@@ -10,7 +10,10 @@ local globals = {
     fonts = {
         header = love.graphics.newFont('assets/typewriterhand.ttf', 32),
         stats  = love.graphics.newFont('assets/typewriterhand.ttf', 16)
-    }
+    },
+
+    gameworldtime = 8
+    
 
 }
 
