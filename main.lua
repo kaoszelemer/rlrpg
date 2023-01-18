@@ -7,7 +7,6 @@ Timer = require('lib.cron')
 --sajat lib
 StateMachine = require('classes.StateMachine')
 
-RANDOMNAMES = require('randomnametable')
 
 
 --offset

@@ -1,9 +1,14 @@
+local randomnames = require('randomnametable')
+local firstname = randomnames[1][love.math.random(1,#randomnames[1])]
+local lastname = randomnames[2][love.math.random(1,#randomnames[2])]
+
+
 local Player = Poi:extend("Player")
 
 function Player:init()
     Character.init(
         self, 
-        RANDOMNAMES[1][love.math.random(1,#RANDOMNAMES[1])].." "..RANDOMNAMES[2][love.math.random(1,#RANDOMNAMES[2])],
+        firstname.." "..lastname,
         10,
         0,
         10
@@ -43,7 +48,7 @@ end
 
 function Player:showCant()
     player.showCantdo = true
-    player.cantdotimer = Timer.after(0.5, function ()
+    player.cantdotimer = Timer.after(1, function ()
         player.showCantdo = false
     end)
 end
