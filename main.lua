@@ -221,6 +221,7 @@ function love.draw()
             love.graphics.setColor(1,0,0)
         --    print(x..y, cityMap[x][y].x * cityMap[x][y].w, cityMap[x][y].y * cityMap[x][y].h)
             love.graphics.rectangle("line", (cityMap[x][y].x * cityMap[x][y].w), (cityMap[x][y].y * cityMap[x][y].h), cityMap[x][y].w, cityMap[x][y].h)
+            love.graphics.setColor(1,1,1)
         end
 
     end
