@@ -7,6 +7,9 @@ Timer = require('lib.cron')
 --sajat lib
 StateMachine = require('classes.StateMachine')
 
+RANDOMNAMES = require('randomnametable')
+
+
 --offset
 
 
@@ -23,6 +26,7 @@ Field = require('classes.tiles.Field')
 Poi = require('classes.pois.Poi')
 Home = require('classes.pois.Home')
 Factory = require('classes.pois.Factory')
+Dealer = require('classes.pois.Dealer')
 
 Character = require('classes.characters.Character')
 Player = require('classes.characters.Player')
@@ -31,7 +35,9 @@ Button = require('classes.buttons.Button')
 GoOut = require('classes.buttons.GoOut')
 Explore = require('classes.buttons.Explore')
 Work = require('classes.buttons.Work')
-
+Sleep = require('classes.buttons.Sleep')
+Cocaine = require('classes.buttons.Cocaine')
+Weed = require('classes.buttons.Weed')
 
 cityMap = {}
 
@@ -132,9 +138,6 @@ local function createHomePoi()
 
     POIs[1] = Home(HOUSES[pos].x * 32, HOUSES[pos].y * 32)
 
-   -- PoiWorld:add(POIs[1], POIs[1].x, POIs[1].y, POIs[1].w, POIs[1].h)
-    
-
 end
 
 local function updateGameWorld()
@@ -157,7 +160,7 @@ local function updateButtonWorld()
     local objects, len = MenuWorld:queryRect(GLOBALS.mX, GLOBALS.mY, 1,1)
         
     for i = 1, len do
-       -- print(objects[i].name)
+     --  print(objects[i].name)
         objects[i].hovered = true
     end
 end
@@ -236,6 +239,18 @@ function love.update(dt)
   if playerState.state == playerState.states.city and #BUTTONS == 0 then
     table.insert(BUTTONS, Explore(GLOBALS.scrw-280, 250))
   end
+
+  if player.showCantdo then
+    player.cantdotimer:update(dt)
+ 
+  end
+
+  if player.energy > 10 then
+    player.energy = 10
+  end
+  if player.aliveness > 10 then
+    player.aliveness = 10
+  end
    
 
 
@@ -245,47 +260,48 @@ end
 
 function love.draw()
 
-  for x = 1, GLOBALS.maxtiles do
-    for y = 1, GLOBALS.maxtiles do
+    for x = 1, GLOBALS.maxtiles do
+        for y = 1, GLOBALS.maxtiles do
 
-        love.graphics.draw(cityMap[x][y].img, cityMap[x][y].x * cityMap[x][y].w, cityMap[x][y].y * cityMap[x][y].h)
+            love.graphics.draw(cityMap[x][y].img, cityMap[x][y].x * cityMap[x][y].w, cityMap[x][y].y * cityMap[x][y].h)
 
-        if cityMap[x][y].hovered then
-            love.graphics.setColor(1,0,0)
-            love.graphics.rectangle("line", (cityMap[x][y].x * cityMap[x][y].w), (cityMap[x][y].y * cityMap[x][y].h), cityMap[x][y].w, cityMap[x][y].h)
-            love.graphics.setColor(1,1,1)
+            if cityMap[x][y].hovered then
+                love.graphics.setColor(1,0,0)
+                love.graphics.rectangle("line", (cityMap[x][y].x * cityMap[x][y].w), (cityMap[x][y].y * cityMap[x][y].h), cityMap[x][y].w, cityMap[x][y].h)
+                love.graphics.setColor(1,1,1)
+            end
+
         end
-
     end
-  end
 
-  for k, v in ipairs(POIs) do
-    love.graphics.setColor(1,1,1)
-    v:draw()
-  end
+    for k, v in ipairs(POIs) do
+        love.graphics.setColor(1,1,1)
+        v:draw()
+    end
 
-  love.graphics.setFont(GLOBALS.fonts.header)
-  love.graphics.print(player.name, 10, 0)
-
-  player:draw()
-
-  for k, v in ipairs(BUTTONS) do
-    v:draw()
-    love.graphics.print(v.name, v.x + 30, v.y + 30)
-  end
-
-  Button:draw()
-
-  if playerState.state == playerState.states.city then
     love.graphics.setFont(GLOBALS.fonts.header)
-    love.graphics.print("City", GLOBALS.scrw - 350, 10)
-    love.graphics.setFont(GLOBALS.fonts.stats)
-    love.graphics.print("Its your neigborhood.\nCrackhouses all around.\nKinda depressive.", GLOBALS.scrw - 300, 150)
-    love.graphics.print("Exploration level:"..cityMap.explorationlevel.."%", GLOBALS.scrw - 350, 50)
-  end
-  
+    love.graphics.print(player.name, 10, 0)
 
-  love.graphics.print("Time\n"..GLOBALS.gameworldtime..":00",GLOBALS.scrw-100, 10)
+    player:draw()
+
+
+
+    for k, v in ipairs(BUTTONS) do
+        v:draw()
+    end
+
+    Button:draw()
+
+    if playerState.state == playerState.states.city then
+        love.graphics.setFont(GLOBALS.fonts.header)
+        love.graphics.print("City", GLOBALS.scrw - 350, 10)
+        love.graphics.setFont(GLOBALS.fonts.stats)
+        love.graphics.print("Its your neigborhood.\nCrackhouses all around.\nKinda depressive.", GLOBALS.scrw - 300, 150)
+        love.graphics.print("Exploration level:"..cityMap.explorationlevel.."%", GLOBALS.scrw - 350, 50)
+    end
+
+
+    love.graphics.print("Time\n"..GLOBALS.gameworldtime..":00",GLOBALS.scrw-100, 10)
  
   
 

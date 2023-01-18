@@ -11,6 +11,7 @@ function Button:init(x, y, w, h, name, img)
 
     
     MenuWorld:add(self, self.x, self.y, self.w, self.h)
+    self.cadd = true
 end
 
 function Button:draw()
@@ -22,12 +23,57 @@ function Button:draw()
        
     end
 
+    
+
 
 end
 
 function Button:action()
     print("something")
 
+end
+
+function Button:removeall()
+    if #BUTTONS >= 1 then
+        for k,v in ipairs(BUTTONS) do
+            if v.cadd ~= false then
+                v.cadd = false
+                MenuWorld:remove(v)
+                print("removed "..v.name)
+            end
+        end
+        BUTTONS = {}
+    end
+
+end
+
+
+function Button:add(item)
+    local x = GLOBALS.scrw-280
+    local y
+
+    if #BUTTONS > 0 then
+        y = BUTTONS[#BUTTONS].y + 80
+    else
+        
+        y = 250
+    end
+
+
+    if item == "Sleep" then
+        table.insert(BUTTONS, Sleep(x, y))
+    elseif item == "GoOut" then
+        table.insert(BUTTONS, GoOut(x, y))
+    elseif item == "Work" then
+        table.insert(BUTTONS, Work(x, y))
+    elseif item == "Cocaine" then
+        table.insert(BUTTONS, Cocaine(x, y))
+    elseif item == "Weed" then
+        table.insert(BUTTONS, Weed(x, y))
+    elseif item == "Explore" then
+        table.insert(BUTTONS, Explore(x, y))
+    end
+    print("added "..item.." button")
 end
 
 function Button:update(dt)
@@ -41,10 +87,6 @@ function Button:update(dt)
         self.idleprogress:update(dt)
     end
 
-    if self.quitpoi then
-            self.quitpoi = false
-            playerState:changeState(playerState.states.city)
-    end
 end
 
 function Button:progressBar(length)
@@ -52,10 +94,9 @@ function Button:progressBar(length)
     self.progress = 0
     self.showprogress = true
     self.progresslength = length
-    self.progresstime = Timer.after(1, function ()
-      
-        self.showprogress = false
-        self.quitpoi = true
+    self.progresstime = Timer.after(1, function ()  
+    self.showprogress = false
+    
     end)
 
 

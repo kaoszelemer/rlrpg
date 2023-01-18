@@ -33,18 +33,24 @@ end
 
 function Home:action()
 
-    print("action")
-    for i = 1, #BUTTONS do
-        table.remove(BUTTONS, i)
+    print("in home action")
+    print(player.todo) 
+    Button:removeall()
+  
+    playerState:changeState(playerState.states.poiresolution)
+    if GLOBALS.gameworldtime >= 19 then
+        player.todo = 1
+        Button:add("Sleep")
     end
-    if self.todo == nil then
-        self.nothingpanel = true
-        local action = GoOut(GLOBALS.scrw-280, 250)
-        table.insert(BUTTONS, action)
 
+    if player.todo == nil then
+        self.nothingpanel = true
+        Button:add("GoOut")
     end
     
     self.panelvisible = true
+
+
 
 
 end

@@ -12,6 +12,7 @@ function Poi:init(x, y, c, w, h, name, type, img)
     self.img = img
    
     PoiWorld:add(self, self.x, self.y, self.w, self.h)
+    self.cadd = true
     
 end
 

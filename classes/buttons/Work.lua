@@ -18,39 +18,32 @@ function Work:draw()
    
     if playerState.state == playerState.states.poiresolution then
         love.graphics.draw(self.img, self.x, self.y)
+        love.graphics.print(self.name, self.x + 30, self.y + 30)
     end
 end
 
 function Work:action()
  
 
-    Button:progressBar(0.05)
-    
-    --[[ for i = 1, #BUTTONS do
-        table.remove(BUTTONS, i)
-    end ]]
-
-   --[[  if GLOBALS.gameworldtime < 24 then
-        GLOBALS.gameworldtime = GLOBALS.gameworldtime + 1
+    if player.energy - 5 > 1 and player.aliveness - 4 > 1  then
+        
+        if GLOBALS.gameworldtime <= 24 then
+            GLOBALS.gameworldtime = GLOBALS.gameworldtime + 9
+        else
+            GLOBALS.gameworldtime = 8
+        end
+        Button:progressBar(0.05)
+        player.energy = player.energy - 5
+        player.money = player.money + 18
     else
-        GLOBALS.gameworldtime = 8
+        player:showCant()
     end
-
-    if cityMap.explorationlevel < 100 and player.energy ~= 0 then
-        cityMap.explorationlevel = cityMap.explorationlevel + 3
-        player.energy = player.energy - 1
-    end
-
-    if cityMap.explorationlevel == 3 then
-        local pos = love.math.random(#HOUSES)
-
-        table.insert(POIs, Factory(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
+ 
+   
     
-       -- PoiWorld:add(POIs[1], POIs[1].x, POIs[1].y, POIs[1].w, POIs[1].h)
-      
-    end ]]
 
-  --  table.insert(BUTTONS, Work(GLOBALS.scrw-280, 312))
+
+
 
     
 

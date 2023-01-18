@@ -1,6 +1,6 @@
-local Factory = Poi:extend("Factory")
+local Dealer = Poi:extend("Dealer")
 
-function Factory:init(x, y)
+function Dealer:init(x, y)
     Poi.init(
         self, 
         x, 
@@ -8,13 +8,13 @@ function Factory:init(x, y)
         {0,1,0}, 
         32,
         32,
-        "Cheese Factory",
-        "Factory",
-        love.graphics.newImage('assets/pic/factory.png')
+        "Cheese Dealer",
+        "Dealer",
+        love.graphics.newImage('assets/pic/dealer.png')
     )
 end
 
-function Factory:draw()
+function Dealer:draw()
 
     love.graphics.draw(self.img, self.x, self.y)
     if self.panelvisible then
@@ -23,7 +23,7 @@ function Factory:draw()
         love.graphics.setFont(GLOBALS.fonts.stats)
 
         if self.nothingpanel then
-            love.graphics.print("It's a cheesefactory.\nThey are also known as slavers\nSmells like heaven", GLOBALS.scrw - 300, 150)
+            love.graphics.print("It's the local drugdealer.\nHe has two kinds of goods\nCocaine or weed", GLOBALS.scrw - 300, 150)
         end
 
     end
@@ -31,18 +31,18 @@ function Factory:draw()
 
 end
 
-function Factory:action()
+function Dealer:action()
 
-    print("action")
     Button:removeall()
-    
-   
-    self.nothingpanel = true
-
+    print("dealer action")
     playerState:changeState(playerState.states.poiresolution)
     
-    Button:add("Work")
+    Button:add("Cocaine")
+    Button:add("Weed")
     Button:add("GoOut")
+  
+    self.nothingpanel = true
+
 
     self.panelvisible = true
 
@@ -50,4 +50,4 @@ function Factory:action()
 end
 
 
-return Factory
+return Dealer

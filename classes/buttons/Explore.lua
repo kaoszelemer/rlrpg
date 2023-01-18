@@ -17,6 +17,7 @@ end
 function Explore:draw()
     if playerState.state == playerState.states.city then
         love.graphics.draw(self.img, self.x, self.y)
+        love.graphics.print(self.name, self.x + 30, self.y + 30)
     end
 end
 
@@ -25,9 +26,7 @@ function Explore:action()
 
     Button:progressBar(0.05)
     
-    for i = 1, #BUTTONS do
-        table.remove(BUTTONS, i)
-    end
+  
 
     if GLOBALS.gameworldtime < 24 then
         GLOBALS.gameworldtime = GLOBALS.gameworldtime + 1
@@ -42,14 +41,14 @@ function Explore:action()
 
     if cityMap.explorationlevel == 3 then
         local pos = love.math.random(#HOUSES)
-
         table.insert(POIs, Factory(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
-    
-       -- PoiWorld:add(POIs[1], POIs[1].x, POIs[1].y, POIs[1].w, POIs[1].h)
-      
+    end
+    if cityMap.explorationlevel == 9 then
+        local pos = love.math.random(#HOUSES)
+        table.insert(POIs, Dealer(HOUSES[pos].x * 32, HOUSES[pos].y * 32))  
     end
 
-    table.insert(BUTTONS, Explore(GLOBALS.scrw-280, 250))
+   
 
     
 
