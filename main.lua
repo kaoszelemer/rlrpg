@@ -129,8 +129,6 @@ local function createMap()
 end 
 
 
-
-
 local function createHomePoi()
 
     local pos = love.math.random(#HOUSES)
@@ -185,7 +183,6 @@ function love.mousereleased()
         end
     end
 end
-
 
 function love.load()
  
