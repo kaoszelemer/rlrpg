@@ -15,7 +15,7 @@ function Sleep:init(x, y)
 end
 
 function Sleep:draw()
-    if playerState.state ~= playerState.states.city then
+    if playerState.state == playerState.states.poiresolution and playerState.state ~= playerState.states.progressing  then
         love.graphics.draw(self.img, self.x, self.y)
         love.graphics.print(self.name, self.x + 30, self.y + 30)
     end
@@ -30,6 +30,7 @@ function Sleep:action()
     Button:progressBar(0.1)
     
     GLOBALS.gameworldtime = 8
+    GLOBALS.gameworlddays = GLOBALS.gameworlddays + 1
     player.energy = player.energy + 7
     player.aliveness = player.aliveness + 6
     player.todo = nil

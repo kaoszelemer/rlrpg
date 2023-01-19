@@ -15,24 +15,20 @@ function Explore:init(x, y)
 end
 
 function Explore:draw()
-    if playerState.state == playerState.states.city then
+    if playerState.state == playerState.states.city and playerState.state ~= playerState.states.progressing then
         love.graphics.draw(self.img, self.x, self.y)
         love.graphics.print(self.name, self.x + 30, self.y + 30)
     end
 end
 
 function Explore:action()
- 
+    print("exploring..")
 
     Button:progressBar(0.05)
     
   
 
-    if GLOBALS.gameworldtime < 24 then
-        GLOBALS.gameworldtime = GLOBALS.gameworldtime + 1
-    else
-        GLOBALS.gameworldtime = 8
-    end
+    gameWorldTimeAdjust(2)
 
     if cityMap.explorationlevel < 100 and player.energy ~= 0 then
         cityMap.explorationlevel = cityMap.explorationlevel + 3
@@ -46,6 +42,10 @@ function Explore:action()
     if cityMap.explorationlevel == 9 then
         local pos = love.math.random(#HOUSES)
         table.insert(POIs, Dealer(HOUSES[pos].x * 32, HOUSES[pos].y * 32))  
+    end
+    if cityMap.explorationlevel == 18 then
+        local pos = love.math.random(#HOUSES)
+        table.insert(POIs, Pub(HOUSES[pos].x * 32, HOUSES[pos].y * 32))  
     end
 
    

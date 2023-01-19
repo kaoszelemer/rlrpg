@@ -29,7 +29,8 @@ local names = {
         "Bananasz",
         "Megrax",
         "Telexlexe",
-        "Ajahuaszka"
+        "Ajahuaszka",
+        "Fazacs"
     },
     {
         "Jonathan",
@@ -47,7 +48,8 @@ local names = {
         "Tivadar",
         "Polpot",
         "Steve",
-        "Hrgmrg"
+        "Hrgmrg",
+        "Darxosz"
 
 
     }

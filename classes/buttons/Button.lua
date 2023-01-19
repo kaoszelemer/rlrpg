@@ -17,9 +17,10 @@ end
 function Button:draw()
 
     if self.showprogress then
+        
         love.graphics.setColor(1,1,1)
-        love.graphics.print("Doing selected action", 720, 360)
-        love.graphics.rectangle("fill", 700, 400, self.progress, 20)
+        love.graphics.print("Doing selected action", 720, 560)
+        love.graphics.rectangle("fill", 700, 600, self.progress, 20)
        
     end
 
@@ -72,6 +73,10 @@ function Button:add(item)
         table.insert(BUTTONS, Weed(x, y))
     elseif item == "Explore" then
         table.insert(BUTTONS, Explore(x, y))
+    elseif item == "Whiskey" then
+        table.insert(BUTTONS, Whiskey(x, y))
+    elseif item == "Date" then
+        table.insert(BUTTONS, Date(x, y))
     end
     print("added "..item.." button")
 end
@@ -92,10 +97,18 @@ end
 function Button:progressBar(length)
 
     self.progress = 0
+
+    playerState:changeState(playerState.states.progressing)
+
     self.showprogress = true
     self.progresslength = length
     self.progresstime = Timer.after(1, function ()  
-    self.showprogress = false
+      self.showprogress = false
+        if player.isInCity then
+            playerState:changeState(playerState.states.city)
+        else
+            playerState:changeState(playerState.states.poiresolution)
+        end
     
     end)
 

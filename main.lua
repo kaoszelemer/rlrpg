@@ -26,6 +26,7 @@ Poi = require('classes.pois.Poi')
 Home = require('classes.pois.Home')
 Factory = require('classes.pois.Factory')
 Dealer = require('classes.pois.Dealer')
+Pub = require('classes.pois.Pub')
 
 Character = require('classes.characters.Character')
 Player = require('classes.characters.Player')
@@ -37,6 +38,8 @@ Work = require('classes.buttons.Work')
 Sleep = require('classes.buttons.Sleep')
 Cocaine = require('classes.buttons.Cocaine')
 Weed = require('classes.buttons.Weed')
+Whiskey = require('classes.buttons.Whiskey')
+Date = require('classes.buttons.Date')
 
 cityMap = {}
 
@@ -48,13 +51,18 @@ MenuWorld = Bump.newWorld(64)
 playerState = StateMachine({
     city = {
         name = "city",
-        transitions = {"poiresolution", "city"} 
+        transitions = {"poiresolution", "city", "progressing"} 
     },
 
     poiresolution = {
         name = "poiresolution",
-        transitions = {"city", "poiresolution"}
+        transitions = {"city", "poiresolution", "progressing"}
     },
+
+    progressing = {
+        name = "progressing",
+        transitions = {"city", "poiresolution", "progressing"}
+    }
 
     },
     "city"
@@ -162,6 +170,15 @@ local function updateButtonWorld()
     end
 end
 
+function gameWorldTimeAdjust(time)
+    if GLOBALS.gameworldtime < 24 then
+        GLOBALS.gameworldtime = GLOBALS.gameworldtime + time
+    else
+        GLOBALS.gameworldtime = 8
+        GLOBALS.gameworlddays = GLOBALS.gameworlddays + 1
+    end
+end
+
 function love.mousemoved(x,y)
     GLOBALS.mX = x
     GLOBALS.mY = y
@@ -191,12 +208,13 @@ function love.load()
     createMap()
     POIs = {}
     BUTTONS = {}
+    
     table.insert(BUTTONS, Explore(GLOBALS.scrw-280, 250))
     createHomePoi()
     cityMap.explorationlevel = 0
 
     player = Player()
-    
+    player.isInCity = true
     
 
 end
@@ -233,7 +251,8 @@ function love.update(dt)
   --  end
 
   if playerState.state == playerState.states.city and #BUTTONS == 0 then
-    table.insert(BUTTONS, Explore(GLOBALS.scrw-280, 250))
+    Button:add("Explore")
+    player.isInCity = true
   end
 
   if player.showCantdo then
@@ -298,7 +317,15 @@ function love.draw()
 
 
     love.graphics.print("Time\n"..GLOBALS.gameworldtime..":00",GLOBALS.scrw-100, 10)
- 
+    love.graphics.print("Days: "..GLOBALS.gameworlddays, GLOBALS.scrw-100, 52)
+    
+    if player.energy <= 4 then
+        love.graphics.setColor(1,0,0)
+        love.graphics.print("LOW ENERGY, find a place to sleep!", 700, 100)
+        love.graphics.setColor(1,1,0)
+        love.graphics.print("LOW ENERGY, find a place to sleep!", 699, 99)
+        love.graphics.setColor(1,1,1)
+    end
   
 
 

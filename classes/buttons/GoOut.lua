@@ -15,14 +15,14 @@ function GoOut:init(x, y)
 end
 
 function GoOut:draw()
-    if playerState.state ~= playerState.states.city then
+    if playerState.state == playerState.states.poiresolution and player.isInCity == false and playerState.state ~= playerState.states.progressing then
         love.graphics.draw(self.img, self.x, self.y)
         love.graphics.print(self.name, self.x + 30, self.y + 30)
     end
 end
 
 function GoOut:action()
-    print("buttonaction")
+    print("going out")
   
 
     for k,v in ipairs(POIs) do
@@ -31,10 +31,10 @@ function GoOut:action()
         end
     end
 
-    Button:progressBar(0.05)
+   -- Button:progressBar(0.05)
   
     Button:removeall()
-
+    player.isInCity = true
     playerState:changeState(playerState.states.city)
 
     if cityMap.explorationlevel <= 100 then

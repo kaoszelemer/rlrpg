@@ -34,6 +34,7 @@ end
 function Factory:action()
 
     print("action")
+    player.isInCity = false
     Button:removeall()
     
    

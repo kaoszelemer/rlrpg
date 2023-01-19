@@ -35,12 +35,20 @@ function Home:action()
 
     print("in home action")
     print(player.todo) 
+    player.isInCity = false
     Button:removeall()
+
   
     playerState:changeState(playerState.states.poiresolution)
-    if GLOBALS.gameworldtime >= 19 then
+
+    if GLOBALS.gameworldtime >= 19 or player.energy <= 4 then
         player.todo = 1
         Button:add("Sleep")
+    end
+
+    if player.aliveness < 2 then
+        player.todo =1
+        Button:add("Suicide")
     end
 
     if player.todo == nil then

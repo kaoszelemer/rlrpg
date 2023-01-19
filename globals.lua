@@ -12,7 +12,8 @@ local globals = {
         stats  = love.graphics.newFont('assets/typewriterhand.ttf', 16)
     },
 
-    gameworldtime = 8
+    gameworldtime = 8,
+    gameworlddays = 123,
     
 
 }

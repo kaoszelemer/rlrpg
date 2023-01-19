@@ -3,7 +3,7 @@ local firstname = randomnames[1][love.math.random(1,#randomnames[1])]
 local lastname = randomnames[2][love.math.random(1,#randomnames[2])]
 
 
-local Player = Poi:extend("Player")
+local Player = Character:extend("Player")
 
 function Player:init()
     Character.init(

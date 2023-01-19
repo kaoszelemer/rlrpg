@@ -16,22 +16,18 @@ end
 
 function Work:draw()
    
-    if playerState.state == playerState.states.poiresolution then
+    if playerState.state == playerState.states.poiresolution and playerState.state ~= playerState.states.progressing then
         love.graphics.draw(self.img, self.x, self.y)
         love.graphics.print(self.name, self.x + 30, self.y + 30)
     end
 end
 
 function Work:action()
- 
+    print("working hard..")
 
     if player.energy - 5 > 1 and player.aliveness - 4 > 1  then
         
-        if GLOBALS.gameworldtime <= 24 then
-            GLOBALS.gameworldtime = GLOBALS.gameworldtime + 9
-        else
-            GLOBALS.gameworldtime = 8
-        end
+        gameWorldTimeAdjust(9)
         Button:progressBar(0.05)
         player.energy = player.energy - 5
         player.money = player.money + 18

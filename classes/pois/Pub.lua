@@ -1,6 +1,6 @@
-local Dealer = Poi:extend("Dealer")
+local Pub = Poi:extend("Pub")
 
-function Dealer:init(x, y)
+function Pub:init(x, y)
     Poi.init(
         self, 
         x, 
@@ -8,13 +8,13 @@ function Dealer:init(x, y)
         {0,1,0}, 
         32,
         32,
-        "Drugs Dealer",
-        "Dealer",
-        love.graphics.newImage('assets/pic/dealer.png')
+        "Progress Bar",
+        "Pub",
+        love.graphics.newImage('assets/pic/pub.png')
     )
 end
 
-function Dealer:draw()
+function Pub:draw()
 
     love.graphics.draw(self.img, self.x, self.y)
     if self.panelvisible then
@@ -23,7 +23,7 @@ function Dealer:draw()
         love.graphics.setFont(GLOBALS.fonts.stats)
 
         if self.nothingpanel then
-            love.graphics.print("It's the local drugdealer.\nHe has two kinds of goods\nCocaine or weed", GLOBALS.scrw - 300, 150)
+            love.graphics.print("Smell of booze and liquor\nBut it only opens at night", GLOBALS.scrw - 300, 150)
         end
 
     end
@@ -31,16 +31,23 @@ function Dealer:draw()
 
 end
 
-function Dealer:action()
+function Pub:action()
 
     Button:removeall()
     player.isInCity = false
-    print("dealer action")
+    print("Pub action")
     playerState:changeState(playerState.states.poiresolution)
     
-    Button:add("Cocaine")
-    Button:add("Weed")
-    Button:add("GoOut")
+    if GLOBALS.gameworldtime < 19 then
+        
+        Button:add("GoOut")
+    else
+        Button:add("Whiskey")
+        Button:add("Date")
+        Button:add("GoOut")
+    end
+
+    
   
     self.nothingpanel = true
 
@@ -51,4 +58,4 @@ function Dealer:action()
 end
 
 
-return Dealer
+return Pub
