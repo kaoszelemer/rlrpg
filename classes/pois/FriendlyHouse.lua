@@ -36,7 +36,17 @@ function FriendlyHome:action()
     print("in FriendlyHome action")
     --buttons> talk, exit
 
+    Button:removeall()
+    player.isInCity = false
+    playerState:changeState(playerState.states.poiresolution)
+    
+    Button:add("Talk")
+    Button:add("GoOut")
+  
+    self.nothingpanel = true
 
+
+    self.panelvisible = true
 
 
 end

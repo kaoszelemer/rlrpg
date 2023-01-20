@@ -43,6 +43,7 @@ Weed = require('classes.buttons.Weed')
 Whiskey = require('classes.buttons.Whiskey')
 Date = require('classes.buttons.Date')
 Gamble = require('classes.buttons.Gamble')
+Talk = require('classes.buttons.Talk')
 
 cityMap = {}
 
