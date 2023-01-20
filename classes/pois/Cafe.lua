@@ -10,7 +10,8 @@ function Cafe:init(x, y)
         32,
         "Energy Cafe",
         "Cafe",
-        love.graphics.newImage('assets/pic/cafe.png')
+        love.graphics.newImage('assets/pic/cafe.png'),
+        love.graphics.newImage('assets/pic/cafeinterior.png')
     )
 end
 
@@ -27,6 +28,10 @@ function Cafe:draw()
         end
 
     end
+    
+    if player.isInCafe then
+        love.graphics.draw(self.interiorimg, 32, 32)
+    end
 
 
 end
@@ -38,6 +43,7 @@ function Cafe:action()
 
      Button:removeall()
     player.isInCity = false
+    player.isInCafe = true
     print("dealer action")
     playerState:changeState(playerState.states.poiresolution)
     

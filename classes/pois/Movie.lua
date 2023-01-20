@@ -10,7 +10,8 @@ function Movie:init(x, y)
         32,
         "Moooovie",
         "Movie",
-        love.graphics.newImage('assets/pic/movie.png')
+        love.graphics.newImage('assets/pic/movie.png'),
+        love.graphics.newImage('assets/pic/cinemainterior.png')
     )
 end
 
@@ -28,6 +29,9 @@ function Movie:draw()
 
     end
 
+    if player.isInMovie then
+        love.graphics.draw(self.interiorimg, 32, 32)
+    end
 
 end
 
@@ -35,6 +39,7 @@ function Movie:action()
 
     Button:removeall()
     player.isInCity = false
+    player.isInMovie = true
     print("Movie action")
     playerState:changeState(playerState.states.poiresolution)
     

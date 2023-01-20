@@ -46,6 +46,17 @@ function GoOut:action()
        Button:add("Explore")
     end
 
+    player.isInCafe = false
+    player.isInBusStop = false
+    player.isInCasino = false
+    player.isInCity = true
+    player.isInDealer = false
+    player.isInFactory = false
+    player.isInFh = false
+    player.isInMovie = false
+    player.isInPub = false
+    player.isInHome = false
+
     
 
 end

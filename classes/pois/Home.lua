@@ -10,7 +10,8 @@ function Home:init(x, y)
         32,
         "Your Home",
         "home",
-        love.graphics.newImage('assets/pic/home.png')
+        love.graphics.newImage('assets/pic/home.png'),
+        love.graphics.newImage('assets/pic/homeinterior.png')
     )
 end
 
@@ -27,6 +28,10 @@ function Home:draw()
         end
 
     end
+    
+    if player.isInHome then
+        love.graphics.draw(self.interiorimg, 32, 32)
+    end
 
 
 end
@@ -36,6 +41,7 @@ function Home:action()
     print("in home action")
     print(player.todo) 
     player.isInCity = false
+    player.isInHome = true
     Button:removeall()
 
   

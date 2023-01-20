@@ -10,7 +10,8 @@ function Casino:init(x, y)
         32,
         "Ca$ino",
         "Casino",
-        love.graphics.newImage('assets/pic/Casino.png')
+        love.graphics.newImage('assets/pic/casino.png'),
+        love.graphics.newImage('assets/pic/casinointerior.png')
     )
 end
 
@@ -27,6 +28,10 @@ function Casino:draw()
         end
 
     end
+    
+    if player.isInCasino then
+        love.graphics.draw(self.interiorimg, 32, 32)
+    end
 
 
 end
@@ -38,6 +43,7 @@ function Casino:action()
 
      Button:removeall()
     player.isInCity = false
+    player.isInCasino = true
     print("dealer action")
     playerState:changeState(playerState.states.poiresolution)
     

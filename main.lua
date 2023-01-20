@@ -382,6 +382,9 @@ function love.draw()
                     love.graphics.print("LOW ENERGY, find a place to sleep!", GLOBALS.scrw - 569, 99)
                     love.graphics.setColor(1,1,1)
                 end
+
+
+
             end
 
             if gameState.state == gameState.states.winscreen then

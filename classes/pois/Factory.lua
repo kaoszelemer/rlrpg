@@ -10,7 +10,8 @@ function Factory:init(x, y)
         32,
         "Cheese Factory",
         "Factory",
-        love.graphics.newImage('assets/pic/factory.png')
+        love.graphics.newImage('assets/pic/factory.png'),
+        love.graphics.newImage('assets/pic/factoryinterior.png')
     )
 end
 
@@ -28,6 +29,10 @@ function Factory:draw()
 
     end
 
+    
+    if player.isInFactory then
+        love.graphics.draw(self.interiorimg, 32, 32)
+    end
 
 end
 
@@ -35,6 +40,7 @@ function Factory:action()
 
     print("action")
     player.isInCity = false
+    player.isInFactory = true
     Button:removeall()
     
    

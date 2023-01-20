@@ -10,7 +10,8 @@ function FriendlyHome:init(x, y)
         32,
         "Your friend lives here",
         "FriendlyHome",
-        love.graphics.newImage('assets/pic/FriendlyHouse.png')
+        love.graphics.newImage('assets/pic/friendlyhouse.png'),
+        love.graphics.newImage('assets/pic/friendlyhomeinterior.png')
     )
 end
 
@@ -27,6 +28,10 @@ function FriendlyHome:draw()
         end
 
     end
+    
+    if player.isInFh then
+        love.graphics.draw(self.interiorimg, 32, 32)
+    end
 
 
 end
@@ -38,6 +43,7 @@ function FriendlyHome:action()
 
     Button:removeall()
     player.isInCity = false
+    player.isInFh = true
     playerState:changeState(playerState.states.poiresolution)
     
     Button:add("Talk")

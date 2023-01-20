@@ -10,7 +10,8 @@ function Pub:init(x, y)
         32,
         "PubicPub",
         "Pub",
-        love.graphics.newImage('assets/pic/pub.png')
+        love.graphics.newImage('assets/pic/pub.png'),
+        love.graphics.newImage('assets/pic/pubinterior.png')
     )
 end
 
@@ -28,6 +29,10 @@ function Pub:draw()
 
     end
 
+    if player.isInPub then
+        love.graphics.draw(self.interiorimg, 32, 32)
+    end
+
 
 end
 
@@ -35,6 +40,7 @@ function Pub:action()
 
     Button:removeall()
     player.isInCity = false
+    player.isInPub = true
     print("Pub action")
     playerState:changeState(playerState.states.poiresolution)
     

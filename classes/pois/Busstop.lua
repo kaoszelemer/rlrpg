@@ -10,7 +10,8 @@ function Busstop:init(x, y)
         32,
         "Travel to Arizome",
         "Busstop",
-        love.graphics.newImage('assets/pic/busstop.png')
+        love.graphics.newImage('assets/pic/busstop.png'),
+        love.graphics.newImage('assets/pic/businterior.png')
     )
 end
 
@@ -27,6 +28,10 @@ function Busstop:draw()
         end
 
     end
+    
+    if player.isInBusStop then
+        love.graphics.draw(self.interiorimg, 32, 32)
+    end
 
 
 end
@@ -38,7 +43,7 @@ function Busstop:action()
 
      Button:removeall()
     player.isInCity = false
-
+    player.isInBusStop = true
     playerState:changeState(playerState.states.poiresolution)
     
     Button:add("Ticket")

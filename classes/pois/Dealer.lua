@@ -10,7 +10,8 @@ function Dealer:init(x, y)
         32,
         "Drugs Dealer",
         "Dealer",
-        love.graphics.newImage('assets/pic/dealer.png')
+        love.graphics.newImage('assets/pic/dealer.png'),
+        love.graphics.newImage('assets/pic/dealerinterior.png')
     )
 end
 
@@ -27,6 +28,10 @@ function Dealer:draw()
         end
 
     end
+    
+    if player.isInDealer then
+        love.graphics.draw(self.interiorimg, 32, 32)
+    end
 
 
 end
@@ -35,6 +40,7 @@ function Dealer:action()
 
     Button:removeall()
     player.isInCity = false
+    player.isInDealer = true
     print("dealer action")
     playerState:changeState(playerState.states.poiresolution)
     
