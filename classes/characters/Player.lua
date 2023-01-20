@@ -10,7 +10,7 @@ function Player:init()
         self, 
         firstname.." "..lastname,
         10,
-        500,
+        0,
         10
 
     )
