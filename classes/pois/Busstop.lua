@@ -17,7 +17,9 @@ end
 
 function Busstop:draw()
 
-    love.graphics.draw(self.img, self.x, self.y)
+    if player.isInCity then
+        love.graphics.draw(self.img, self.x, self.y)
+    end
     if self.panelvisible then
         love.graphics.setFont(GLOBALS.fonts.header)
         love.graphics.print(self.name, GLOBALS.scrw - 570, 10)

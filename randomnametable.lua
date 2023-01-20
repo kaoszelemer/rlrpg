@@ -30,7 +30,11 @@ local names = {
         "Megrax",
         "Telexlexe",
         "Ajahuaszka",
-        "Fazacs"
+        "Fazacs",
+        "Kemenes",
+        "Procleszmor",
+        "Hebreny",
+        "Kiflee"
     },
     {
         "Jonathan",
@@ -49,7 +53,13 @@ local names = {
         "Polpot",
         "Steve",
         "Hrgmrg",
-        "Darxosz"
+        "Darxosz",
+        "Jozsi",
+        "Peter",
+        "Kokli",
+        "Energetika",
+        "Zsirizom",
+        "Vrofti"
 
 
     }
