@@ -1,7 +1,7 @@
 local globals = {
 
-    scrw = 1024,
-    scrh = 720,
+    scrw = 1280,
+    scrh = 800,
     mX = 0,
     mY = 0,
 

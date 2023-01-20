@@ -18,7 +18,7 @@ function Gamble:draw()
    
     if playerState.state == playerState.states.poiresolution  then
         love.graphics.draw(self.img, self.x, self.y)
-        love.graphics.print(self.name, self.x + 30, self.y + 30)
+        love.graphics.print(self.name, self.x + 25, self.y + 25)
         
     end
 

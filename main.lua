@@ -248,7 +248,7 @@ function love.load()
     POIs = {}
     BUTTONS = {}
     
-    table.insert(BUTTONS, Explore(GLOBALS.scrw-280, 250))
+    Button:add("Explore")
     createHomePoi()
     cityMap.explorationlevel = 0
 
@@ -346,10 +346,10 @@ function love.draw()
 
         if playerState.state == playerState.states.city then
             love.graphics.setFont(GLOBALS.fonts.header)
-            love.graphics.print("City", GLOBALS.scrw - 350, 10)
+            love.graphics.print("City", GLOBALS.scrw - 570, 10)
             love.graphics.setFont(GLOBALS.fonts.stats)
-            love.graphics.print("Its your neigborhood.\nCrackhouses all around.\nKinda depressive.", GLOBALS.scrw - 300, 150)
-            love.graphics.print("Exploration level:"..cityMap.explorationlevel.."%", GLOBALS.scrw - 350, 50)
+            love.graphics.print("Its your neigborhood.\nCrackhouses all around.\nKinda depressive.", GLOBALS.scrw - 570, 150)
+            love.graphics.print("Exploration level:"..cityMap.explorationlevel.."%", GLOBALS.scrw - 570, 50)
         end
 
 
@@ -358,9 +358,9 @@ function love.draw()
         
         if player.energy <= 4 then
             love.graphics.setColor(1,0,0)
-            love.graphics.print("LOW ENERGY, find a place to sleep!", 700, 100)
+            love.graphics.print("LOW ENERGY, find a place to sleep!", GLOBALS.scrw - 570, 100)
             love.graphics.setColor(1,1,0)
-            love.graphics.print("LOW ENERGY, find a place to sleep!", 699, 99)
+            love.graphics.print("LOW ENERGY, find a place to sleep!", GLOBALS.scrw - 569, 99)
             love.graphics.setColor(1,1,1)
         end
     end

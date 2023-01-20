@@ -1,14 +1,14 @@
 
 local Button = Class("Button")
 
-function Button:init(x, y, w, h, name, img)
+function Button:init(x, y, w, h, name, img, price)
     self.x = x
     self.y = y
     self.w = w
     self.h = h
     self.name = name
     self.img = img
-
+    self.price = price
     
     MenuWorld:add(self, self.x, self.y, self.w, self.h)
     self.cadd = true
@@ -23,6 +23,7 @@ function Button:draw()
         love.graphics.rectangle("fill", 700, 600, self.progress, 20)
        
     end
+
 
     
 
@@ -50,7 +51,7 @@ end
 
 
 function Button:add(item)
-    local x = GLOBALS.scrw-280
+    local x = GLOBALS.scrw-580
     local y
 
     if #BUTTONS > 0 then
