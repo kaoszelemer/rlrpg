@@ -8,7 +8,9 @@ function Sleep:init(x, y)
         168,
         64,
         "Sleep",
-        love.graphics.newImage('assets/pic/button.png')
+        love.graphics.newImage('assets/pic/button.png'),
+        {},
+        "ZZZzzzZZZ.\nGives 7 energy on success.\nGives 6 aliveness on success.\nGives 3 energy on fail\nGives 3 aliveness on fail"
     )
 
    
@@ -28,6 +30,8 @@ function Sleep:action()
     Button:add("GoOut")
    
     Button:progressBar(0.1)
+
+    if love.math.random() > 0.3 then
     player:showResolution(1)
     
     GLOBALS.gameworldtime = 8
@@ -35,6 +39,14 @@ function Sleep:action()
     player.energy = player.energy + 7
     player.aliveness = player.aliveness + 6
     player.todo = nil
+    else
+    player:showResolution(0)
+    GLOBALS.gameworldtime = 8
+    GLOBALS.gameworlddays = GLOBALS.gameworlddays + 1
+    player.energy = player.energy + 3
+    player.aliveness = player.aliveness + 3
+    player.todo = nil 
+    end
 
     
 

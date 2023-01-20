@@ -7,8 +7,10 @@ function Explore:init(x, y)
         y, 
         168,
         64,
-        "Explore - E1-",
-        love.graphics.newImage('assets/pic/button.png')
+        "Explore",
+        love.graphics.newImage('assets/pic/button.png'),
+        {e = 1},
+        "You begin to search for POIs.\n  Takes 1 Energy\n  Takes 2 Hours"
     )
 
    
@@ -18,6 +20,9 @@ function Explore:draw()
     if playerState.state == playerState.states.city and playerState.state ~= playerState.states.progressing then
         love.graphics.draw(self.img, self.x, self.y)
         love.graphics.print(self.name, self.x + 25, self.y + 25)
+    end
+    if self.hovered and playerState.state ~= playerState.states.progressing then
+        love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
     end
 end
 
@@ -31,7 +36,7 @@ function Explore:action()
 
     if cityMap.explorationlevel < 100 and player.energy ~= 0 then
         cityMap.explorationlevel = cityMap.explorationlevel + 3
-        player.energy = player.energy - 1
+        player.energy = player.energy - self.prices.e
     end
 
     if cityMap.explorationlevel == 3 then

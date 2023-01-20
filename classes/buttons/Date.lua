@@ -7,8 +7,11 @@ function Date:init(x, y)
         y, 
         168,
         64,
-        "Date E3- A2-",
-        love.graphics.newImage('assets/pic/button.png')
+        "Date",
+        love.graphics.newImage('assets/pic/button.png'),
+        {},
+        "You look for some love.\nResets Aliveness and Energy on success\nSets Aliveness and Energy to 2 on Fail"
+        
     )
 
    
@@ -21,14 +24,9 @@ function Date:draw()
         love.graphics.print(self.name, self.x + 25, self.y + 25)
         
     end
-
-   --[[  if self.success then
-        love.graphics.print("SUCCESS", 700,700)
-        self.success = false
-    else
-        love.graphics.print("FAIL", 700,700)
-    end ]]
-
+    if self.hovered then
+        love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+    end
 end
 
 function Date:action()
@@ -42,12 +40,10 @@ function Date:action()
   
     if player.energy > 3 and player.aliveness > 2 then
         if rnd < 0.18 then
-            self.success = true
             player.energy = 10
             player.aliveness = 10
             player:showResolution(1)
         else
-            self.success = false
             player.energy = 1
             player.aliveness = 2
             player:showResolution(0)

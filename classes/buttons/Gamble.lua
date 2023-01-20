@@ -7,8 +7,10 @@ function Gamble:init(x, y)
         y, 
         168,
         64,
-        "Gamble - 10$-",
-        love.graphics.newImage('assets/pic/button.png')
+        "Gamble",
+        love.graphics.newImage('assets/pic/button.png'),
+        {a = -2, c = 10},
+        "Gamble on low bets.\nTakes 2 aliveness on every try\nGives double money on success\nCosts 10$"
     )
 
    
@@ -19,10 +21,11 @@ function Gamble:draw()
     if playerState.state == playerState.states.poiresolution  then
         love.graphics.draw(self.img, self.x, self.y)
         love.graphics.print(self.name, self.x + 25, self.y + 25)
-        
     end
 
-
+    if self.hovered and playerState.state ~= playerState.states.progressing then
+        love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+    end
 end
 
 function Gamble:action()
@@ -37,10 +40,12 @@ function Gamble:action()
         local rnd = love.math.random()
         if rnd > 0.9 then
             player:showResolution(1)
-            player.money = player.money - 10
+            player.money = player.money - self.prices.c
             player.money = player.money * 2
+            player.aliveness = player.aliveness - self.prices.a
         else
-            player.money = player.money - 10
+            player.money = player.money - self.prices.c
+            player.aliveness = player.aliveness - self.prices.a
             player:showResolution(0)
         end
     else

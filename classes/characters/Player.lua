@@ -10,7 +10,7 @@ function Player:init()
         self, 
         firstname.." "..lastname,
         10,
-        0,
+        500,
         10
 
     )
@@ -64,11 +64,11 @@ function Player:draw()
 
     if player.showSuccess then
         love.graphics.setFont(GLOBALS.fonts.header)
-        love.graphics.print("SUCCESS", GLOBALS.scrw - 280,250)
+        love.graphics.print("SUCCESS", GLOBALS.scrw - 550,250)
         love.graphics.setFont(GLOBALS.fonts.stats)
     elseif player.showFail then
         love.graphics.setFont(GLOBALS.fonts.header)
-        love.graphics.print("FAIL", GLOBALS.scrw - 280,250)
+        love.graphics.print("FAIL", GLOBALS.scrw - 550,250)
         love.graphics.setFont(GLOBALS.fonts.stats)
     end
     

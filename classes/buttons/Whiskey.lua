@@ -7,9 +7,11 @@ function Whiskey:init(x, y)
         y, 
         168,
         64,
-        "Whiskey 5$-",
-        love.graphics.newImage('assets/pic/button.png')
-    )
+        "Whiskey",
+        love.graphics.newImage('assets/pic/button.png'),
+        {e = 2, a = 2, c = 5},
+        "Ordered by the doctor\nGives 2 energy on success.\nTakes 2 aliveness on fail\nCosts 5$"
+        )
 
    
 end
@@ -20,6 +22,9 @@ function Whiskey:draw()
         love.graphics.draw(self.img, self.x, self.y)
         love.graphics.print(self.name, self.x+25, self.y + 25)
     end
+    if self.hovered and playerState.state ~= playerState.states.progressing then
+        love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+    end
 end
 
 function Whiskey:action()
@@ -27,21 +32,20 @@ function Whiskey:action()
 
     print("drinking whiskey..")
 
+
     if player.money >= 5 then
         gameWorldTimeAdjust(1)
-        Button:progressBar(0.2)
-        player:showResolution(1)
-        if player.aliveness < 9 then
-            player.aliveness = player.aliveness + 1
+        Button:progressBar(0.1)
+        
+        player.money = player.money - self.prices.c
+
+        if love.math.random() > 0.5 then
+            player:showResolution(1)
+            player.aliveness = player.energy + self.prices.e
         else
-            player.aliveness = 10
+            player:showResolution(0)
+            player.energy = player.aliveness - self.prices.a
         end
-        if player.energy > 0 then
-            player.energy = player.energy + 1
-        else
-            player:showCant()
-        end
-        player.money = player.money - 5
     else
         player:showCant()
     end

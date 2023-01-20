@@ -7,8 +7,10 @@ function Work:init(x, y)
         y, 
         168,
         64,
-        "Work 18$+ E5- A4-",
-        love.graphics.newImage('assets/pic/button.png')
+        "Work",
+        love.graphics.newImage('assets/pic/button.png'),
+        {e = 5, c = 18, a = 6, cf = 15},
+        "A place to get money.\nTakes 5 energy.\nTakes 6 aliveness\nGives 18$ on success\nGives 15$ on FAIL"
     )
 
    
@@ -20,20 +22,29 @@ function Work:draw()
         love.graphics.draw(self.img, self.x, self.y)
         love.graphics.print(self.name, self.x+25, self.y + 25)
     end
+    if self.hovered and playerState.state ~= playerState.states.progressing then
+        love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+    end
 end
 
 function Work:action()
     print("working hard..")
 
-    if player.energy - 5 > 1 and player.aliveness - 4 > 1  then
-        player:showResolution(1)
+        
+        if love.math.random () < 0.7 then
+            player:showResolution(1)
+            player.money = player.money + self.prices.c
+        else
+            player:showResolution(0)
+            player.money = player.money + self.prices.cf
+        end
         gameWorldTimeAdjust(9)
         Button:progressBar(0.05)
-        player.energy = player.energy - 5
-        player.money = player.money + 18
-    else
-        player:showCant()
-    end
+        player.energy = player.energy - self.prices.e
+        player.aliveness = player.aliveness - self.prices.a
+ 
+
+
  
    
     

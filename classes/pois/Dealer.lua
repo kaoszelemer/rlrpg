@@ -23,7 +23,7 @@ function Dealer:draw()
         love.graphics.setFont(GLOBALS.fonts.stats)
 
         if self.nothingpanel then
-            love.graphics.print("It's the local drugdealer.\nHe has two kinds of goods\nCocaine or weed", GLOBALS.scrw - 300, 150)
+            love.graphics.print("It's the local drugdealer.\nHe has two kinds of goods\nCocaine or weed", GLOBALS.scrw - 570, 150)
         end
 
     end

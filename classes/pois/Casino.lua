@@ -23,7 +23,7 @@ function Casino:draw()
         love.graphics.setFont(GLOBALS.fonts.stats)
 
         if self.nothingpanel then
-            love.graphics.print("A place where you can spend\nyour hard earned money.", GLOBALS.scrw - 300, 150)
+            love.graphics.print("A place where you can spend\nyour hard earned money.", GLOBALS.scrw - 570, 150)
         end
 
     end

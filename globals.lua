@@ -13,7 +13,7 @@ local globals = {
     },
 
     gameworldtime = 8,
-    gameworlddays = 123,
+    gameworlddays = 1,
 
 
     fullscreenimages = {

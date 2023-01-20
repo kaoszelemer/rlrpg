@@ -8,7 +8,9 @@ function GoOut:init(x, y)
         168,
         64,
         "Go Out",
-        love.graphics.newImage('assets/pic/button.png')
+        love.graphics.newImage('assets/pic/button.png'),
+        {},
+        "Exit from this POI.\nThe only thing whats free"
     )
 
    
@@ -18,6 +20,9 @@ function GoOut:draw()
     if playerState.state == playerState.states.poiresolution and player.isInCity == false and playerState.state ~= playerState.states.progressing then
         love.graphics.draw(self.img, self.x, self.y)
         love.graphics.print(self.name, self.x +25, self.y + 25)
+    end
+    if self.hovered and playerState.state ~= playerState.states.progressing then
+        love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
     end
 end
 

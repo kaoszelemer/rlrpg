@@ -23,7 +23,7 @@ function FriendlyHome:draw()
         love.graphics.setFont(GLOBALS.fonts.stats)
 
         if self.nothingpanel then
-            love.graphics.print("at least you found a friend.\nHe lives here.\nThe house is the same shit as every other.", GLOBALS.scrw - 300, 150)
+            love.graphics.print("at least you found a friend.\nHe lives here.\nThe house is the same shit as every other.", GLOBALS.scrw - 570, 150)
         end
 
     end

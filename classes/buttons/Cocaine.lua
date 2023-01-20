@@ -9,6 +9,7 @@ function Cocaine:init(x, y)
         64,
         "Cocaine",
         love.graphics.newImage('assets/pic/button.png'),
+        {e=5,a=-5,c=25},
         "Costs 25$ - gives 5 energy on success\nTakes 5 aliveness on fail"
     )
 
@@ -24,7 +25,7 @@ function Cocaine:draw()
 
     
     if self.hovered then
-        love.graphics.print(self.price, GLOBALS.mX + 100, GLOBALS.mY + 50)
+        love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
     end
 
 end
@@ -36,16 +37,20 @@ function Cocaine:action()
  
     if player.money >= 25 then
         gameWorldTimeAdjust(1)
-        if player.aliveness - 4 > 0 then
-            player.aliveness = player.aliveness - 4
-            player:showResolution(1)
-        else
-            player:showCant()
-        end
+        Button:progressBar(0.1)
       
-        player.energy = player.energy + 5
+            if love.math.random() > 0.5 then
+                player:showResolution(1)
+                player.energy = player.energy + self.prices.e
       
-        player.money = player.money - 25
+                player.money = player.money - self.prices.c
+            else
+                player:showResolution(0)
+                player.money = player.money - self.prices.c
+                player.money = player.aliveness - self.prices.a
+            end
+
+   
     else
         player:showCant()
     end

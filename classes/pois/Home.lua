@@ -23,7 +23,7 @@ function Home:draw()
         love.graphics.setFont(GLOBALS.fonts.stats)
 
         if self.nothingpanel then
-            love.graphics.print("there's nothing to do now.\nYou can go out and\nexplore your surrondings.", GLOBALS.scrw - 300, 150)
+            love.graphics.print("there's nothing to do now.\nYou can go out and\nexplore your surrondings.", GLOBALS.scrw - 570, 150)
         end
 
     end
