@@ -73,6 +73,33 @@ playerState = StateMachine({
 )
 
 
+gameState = StateMachine({
+    starting = {
+        name = "starting",
+        transitions = {"starting", "game"},
+    },
+    game = {
+        name = "game",
+        transitions = {"game", "winscreen", "gameover", "settings"}
+    },
+    winscreen = {
+        name = "winscreen",
+        transitions = {"starting", "winscreen"}
+    },
+    gameover = {
+        name = "gameover",
+        transitions = {"gameover", "starting"}
+    },
+    settings = {
+        name = "settings",
+        transitions = {"settings", "game"}
+    }
+    
+},
+
+"starting")
+
+
 
 
 local function createMap()
@@ -190,18 +217,25 @@ function love.mousemoved(x,y)
 end
 
 function love.mousereleased()
-    if playerState.state == playerState.states.city then
-        for k,v in ipairs(POIs) do
-            if v.hovered then
-                playerState:changeState(playerState.states.poiresolution)
-                v:action()
+
+    if gameState.state == gameState.states.starting then
+        gameState:changeState(gameState.states.game)
+    end
+
+    if gameState.state == gameState.states.game then
+        if playerState.state == playerState.states.city then
+            for k,v in ipairs(POIs) do
+                if v.hovered then
+                    playerState:changeState(playerState.states.poiresolution)
+                    v:action()
+                end
             end
         end
-    end
-    for k,v in ipairs(BUTTONS) do
-        if v.hovered then
-            print(v.name, "action")
-            v:action()
+        for k,v in ipairs(BUTTONS) do
+            if v.hovered then
+                print(v.name, "action")
+                v:action()
+            end
         end
     end
 end
@@ -272,58 +306,64 @@ end
 
 function love.draw()
 
-    for x = 1, GLOBALS.maxtiles do
-        for y = 1, GLOBALS.maxtiles do
+    if gameState.state == gameState.states.starting then
+        love.graphics.draw(GLOBALS.fullscreenimages.title, 0,0)
+    end
 
-            love.graphics.draw(cityMap[x][y].img, cityMap[x][y].x * cityMap[x][y].w, cityMap[x][y].y * cityMap[x][y].h)
+    if gameState.state == gameState.states.game then
 
-            if cityMap[x][y].hovered then
-                love.graphics.setColor(1,0,0)
-                love.graphics.rectangle("line", (cityMap[x][y].x * cityMap[x][y].w), (cityMap[x][y].y * cityMap[x][y].h), cityMap[x][y].w, cityMap[x][y].h)
-                love.graphics.setColor(1,1,1)
+        for x = 1, GLOBALS.maxtiles do
+            for y = 1, GLOBALS.maxtiles do
+
+                love.graphics.draw(cityMap[x][y].img, cityMap[x][y].x * cityMap[x][y].w, cityMap[x][y].y * cityMap[x][y].h)
+
+                if cityMap[x][y].hovered then
+                    love.graphics.setColor(1,0,0)
+                    love.graphics.rectangle("line", (cityMap[x][y].x * cityMap[x][y].w), (cityMap[x][y].y * cityMap[x][y].h), cityMap[x][y].w, cityMap[x][y].h)
+                    love.graphics.setColor(1,1,1)
+                end
+
             end
+        end
 
+        for k, v in ipairs(POIs) do
+            love.graphics.setColor(1,1,1)
+            v:draw()
+        end
+
+        love.graphics.setFont(GLOBALS.fonts.header)
+        love.graphics.print(player.name, 10, 0)
+
+        player:draw()
+
+
+
+        for k, v in ipairs(BUTTONS) do
+            v:draw()
+        end
+
+        Button:draw()
+
+        if playerState.state == playerState.states.city then
+            love.graphics.setFont(GLOBALS.fonts.header)
+            love.graphics.print("City", GLOBALS.scrw - 350, 10)
+            love.graphics.setFont(GLOBALS.fonts.stats)
+            love.graphics.print("Its your neigborhood.\nCrackhouses all around.\nKinda depressive.", GLOBALS.scrw - 300, 150)
+            love.graphics.print("Exploration level:"..cityMap.explorationlevel.."%", GLOBALS.scrw - 350, 50)
+        end
+
+
+        love.graphics.print("Time\n"..GLOBALS.gameworldtime..":00",GLOBALS.scrw-100, 10)
+        love.graphics.print("Days: "..GLOBALS.gameworlddays, GLOBALS.scrw-100, 52)
+        
+        if player.energy <= 4 then
+            love.graphics.setColor(1,0,0)
+            love.graphics.print("LOW ENERGY, find a place to sleep!", 700, 100)
+            love.graphics.setColor(1,1,0)
+            love.graphics.print("LOW ENERGY, find a place to sleep!", 699, 99)
+            love.graphics.setColor(1,1,1)
         end
     end
-
-    for k, v in ipairs(POIs) do
-        love.graphics.setColor(1,1,1)
-        v:draw()
-    end
-
-    love.graphics.setFont(GLOBALS.fonts.header)
-    love.graphics.print(player.name, 10, 0)
-
-    player:draw()
-
-
-
-    for k, v in ipairs(BUTTONS) do
-        v:draw()
-    end
-
-    Button:draw()
-
-    if playerState.state == playerState.states.city then
-        love.graphics.setFont(GLOBALS.fonts.header)
-        love.graphics.print("City", GLOBALS.scrw - 350, 10)
-        love.graphics.setFont(GLOBALS.fonts.stats)
-        love.graphics.print("Its your neigborhood.\nCrackhouses all around.\nKinda depressive.", GLOBALS.scrw - 300, 150)
-        love.graphics.print("Exploration level:"..cityMap.explorationlevel.."%", GLOBALS.scrw - 350, 50)
-    end
-
-
-    love.graphics.print("Time\n"..GLOBALS.gameworldtime..":00",GLOBALS.scrw-100, 10)
-    love.graphics.print("Days: "..GLOBALS.gameworlddays, GLOBALS.scrw-100, 52)
-    
-    if player.energy <= 4 then
-        love.graphics.setColor(1,0,0)
-        love.graphics.print("LOW ENERGY, find a place to sleep!", 700, 100)
-        love.graphics.setColor(1,1,0)
-        love.graphics.print("LOW ENERGY, find a place to sleep!", 699, 99)
-        love.graphics.setColor(1,1,1)
-    end
-  
 
 
 end

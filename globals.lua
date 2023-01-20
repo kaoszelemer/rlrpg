@@ -14,6 +14,11 @@ local globals = {
 
     gameworldtime = 8,
     gameworlddays = 123,
+
+
+    fullscreenimages = {
+        title = love.graphics.newImage('assets/pic/titlescreen.png')
+    }
     
 
 }
