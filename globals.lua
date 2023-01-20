@@ -17,7 +17,8 @@ local globals = {
 
 
     fullscreenimages = {
-        title = love.graphics.newImage('assets/pic/titlescreen.png')
+        title = love.graphics.newImage('assets/pic/titlescreen.png'),
+        winscreen = love.graphics.newImage('assets/pic/winscreen.png')
     }
     
 

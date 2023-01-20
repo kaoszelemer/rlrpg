@@ -29,6 +29,7 @@ Dealer = require('classes.pois.Dealer')
 Pub = require('classes.pois.Pub')
 FriendlyHouse = require('classes.pois.FriendlyHouse')
 Casino = require('classes.pois.Casino')
+Busstop = require('classes.pois.Busstop')
 
 Character = require('classes.characters.Character')
 Player = require('classes.characters.Player')
@@ -44,6 +45,7 @@ Whiskey = require('classes.buttons.Whiskey')
 Date = require('classes.buttons.Date')
 Gamble = require('classes.buttons.Gamble')
 Talk = require('classes.buttons.Talk')
+Ticket = require('classes.buttons.Ticket')
 
 cityMap = {}
 
@@ -315,7 +317,7 @@ function love.draw()
         love.graphics.print("You tried to live long enough. Your suffering ended on the "..GLOBALS.deathscreeninfos.day.."th day.", 50, 400)
 
 
-        else
+    else
             if gameState.state == gameState.states.starting then
                 love.graphics.draw(GLOBALS.fullscreenimages.title, 0,0)
             end
@@ -374,6 +376,13 @@ function love.draw()
                     love.graphics.setColor(1,1,1)
                 end
             end
+
+            if gameState.state == gameState.states.winscreen then
+                
+                love.graphics.draw(GLOBALS.fullscreenimages.winscreen, 0,0)
+
+            end
+        
         
     end
 

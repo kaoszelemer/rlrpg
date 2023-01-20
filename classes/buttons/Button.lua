@@ -83,6 +83,8 @@ function Button:add(item)
         table.insert(BUTTONS, Gamble(x, y))
     elseif item == "Talk" then
         table.insert(BUTTONS, Talk(x, y))
+    elseif item == "Ticket" then
+        table.insert(BUTTONS, Ticket(x, y))
     end
     print("added "..item.." button")
 end
