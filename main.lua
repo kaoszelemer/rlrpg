@@ -332,8 +332,18 @@ function love.draw()
         love.graphics.setColor = {1,1,1}
         love.graphics.setFont(GLOBALS.fonts.header)
         love.graphics.print("You have died.\nFirstly it was because of life itself.\nBut the real cause was:\n"..GLOBALS.deathscreeninfos.cause, 50, 100)
-        love.graphics.print("You accumulated a lot of money: "..GLOBALS.deathscreeninfos.money, 50, 350)
-        love.graphics.print("You tried to live long enough. Your suffering ended on the "..GLOBALS.deathscreeninfos.day.."th day.", 50, 400)
+        love.graphics.print("You had this massive ammount of money: "..GLOBALS.deathscreeninfos.money.."$", 50, 350)
+        if GLOBALS.deathscreeninfos.day == 1 then
+            love.graphics.print("You tried to live long enough. Your suffering ended on the "..GLOBALS.deathscreeninfos.day.."st day.", 50, 400)
+        elseif GLOBALS.deathscreeninfos.day == 2 then
+            love.graphics.print("You tried to live long enough. Your suffering ended on the "..GLOBALS.deathscreeninfos.day.."nd day.", 50, 400)
+        else
+            love.graphics.print("You tried to live long enough. Your suffering ended on the "..GLOBALS.deathscreeninfos.day.."th day.", 50, 400)
+        end
+
+        love.graphics.print("Your name was: "..player.name, 50, 550)
+        love.graphics.print("No one will remember you.", 50, 600)
+
 
 
     else
@@ -363,7 +373,7 @@ function love.draw()
                 end
         
                 love.graphics.setFont(GLOBALS.fonts.header)
-                love.graphics.print(player.name, 10, 0)
+                love.graphics.print(player.name, 32, 0)
         
                 player:draw()
         
