@@ -33,9 +33,9 @@ function Ticket:action()
  
 
     print("tryn to buy a ticket..")
+    player.isInCity = false
 
     if player.money > 1000 then
-        player.isInCity = false
         gameState:changeState(gameState.states.winscreen)
       
     else
