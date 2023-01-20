@@ -77,6 +77,8 @@ function Button:add(item)
         table.insert(BUTTONS, Whiskey(x, y))
     elseif item == "Date" then
         table.insert(BUTTONS, Date(x, y))
+    elseif item == "Gamble" then
+        table.insert(BUTTONS, Gamble(x, y))
     end
     print("added "..item.." button")
 end

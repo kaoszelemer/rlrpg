@@ -7,7 +7,7 @@ function Explore:init(x, y)
         y, 
         168,
         64,
-        "Explore",
+        "Explore - E1-",
         love.graphics.newImage('assets/pic/button.png')
     )
 
@@ -24,9 +24,8 @@ end
 function Explore:action()
     print("exploring..")
 
-    Button:progressBar(0.05)
+    Button:progressBar(0.1)
     
-  
 
     gameWorldTimeAdjust(2)
 
@@ -38,14 +37,40 @@ function Explore:action()
     if cityMap.explorationlevel == 3 then
         local pos = love.math.random(#HOUSES)
         table.insert(POIs, Factory(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
+        table.remove(HOUSES, pos)
+        player:showResolution(1)
     end
     if cityMap.explorationlevel == 9 then
         local pos = love.math.random(#HOUSES)
         table.insert(POIs, Dealer(HOUSES[pos].x * 32, HOUSES[pos].y * 32))  
+        table.remove(HOUSES, pos)
+        player:showResolution(1)
     end
     if cityMap.explorationlevel == 18 then
         local pos = love.math.random(#HOUSES)
         table.insert(POIs, Pub(HOUSES[pos].x * 32, HOUSES[pos].y * 32))  
+        table.remove(HOUSES, pos)
+        player:showResolution(1)
+    end
+    if cityMap.explorationlevel > 21 then
+        
+        local rnd = love.math.random(1,5)
+        if rnd == 1 and not player.foundfriendlyhome then
+            local pos = love.math.random(#HOUSES)
+            table.insert(POIs, FriendlyHouse(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
+            player.foundfriendlyhome = true
+            table.remove(HOUSES, pos)
+            player:showResolution(1)
+        elseif rnd == 2 and not player.foundcasino then
+            local pos = love.math.random(#HOUSES)
+            table.insert(POIs, Casino(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
+            player.foundcasino = true
+            table.remove(HOUSES, pos)
+            player:showResolution(1)
+        end
+
+
+
     end
 
    

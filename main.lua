@@ -27,6 +27,8 @@ Home = require('classes.pois.Home')
 Factory = require('classes.pois.Factory')
 Dealer = require('classes.pois.Dealer')
 Pub = require('classes.pois.Pub')
+FriendlyHouse = require('classes.pois.FriendlyHouse')
+Casino = require('classes.pois.Casino')
 
 Character = require('classes.characters.Character')
 Player = require('classes.characters.Player')
@@ -40,6 +42,7 @@ Cocaine = require('classes.buttons.Cocaine')
 Weed = require('classes.buttons.Weed')
 Whiskey = require('classes.buttons.Whiskey')
 Date = require('classes.buttons.Date')
+Gamble = require('classes.buttons.Gamble')
 
 cityMap = {}
 
@@ -131,7 +134,7 @@ local function createMap()
         end
     end
 
-    table.remove(HOUSES, 1)
+   
 
 
 end 
@@ -142,6 +145,7 @@ local function createHomePoi()
     local pos = love.math.random(#HOUSES)
 
     POIs[1] = Home(HOUSES[pos].x * 32, HOUSES[pos].y * 32)
+    table.remove(HOUSES, pos)
 
 end
 
@@ -255,17 +259,9 @@ function love.update(dt)
     player.isInCity = true
   end
 
-  if player.showCantdo then
-    player.cantdotimer:update(dt)
- 
-  end
+  player:updatePlayer(dt)
 
-  if player.energy > 10 then
-    player.energy = 10
-  end
-  if player.aliveness > 10 then
-    player.aliveness = 10
-  end
+ 
    
 
 

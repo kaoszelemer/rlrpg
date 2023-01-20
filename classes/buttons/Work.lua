@@ -7,7 +7,7 @@ function Work:init(x, y)
         y, 
         168,
         64,
-        "Work",
+        "Work 18$+ E5- A4-",
         love.graphics.newImage('assets/pic/button.png')
     )
 
@@ -26,7 +26,7 @@ function Work:action()
     print("working hard..")
 
     if player.energy - 5 > 1 and player.aliveness - 4 > 1  then
-        
+        player:showResolution(1)
         gameWorldTimeAdjust(9)
         Button:progressBar(0.05)
         player.energy = player.energy - 5

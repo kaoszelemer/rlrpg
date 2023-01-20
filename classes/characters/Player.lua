@@ -16,6 +16,24 @@ function Player:init()
     )
 end
 
+function Player:updatePlayer(dt)
+    if self.showCantdo then
+        self.cantdotimer:update(dt)
+     
+      end
+    
+      if self.energy > 10 then
+        self.energy = 10
+      end
+      if self.aliveness > 10 then
+        self.aliveness = 10
+      end
+
+      if self.showSuccess then
+        self.successtimer:update(dt)
+      end
+end
+
 function Player:draw()
     --energy
     love.graphics.setFont(GLOBALS.fonts.stats)
@@ -41,7 +59,17 @@ function Player:draw()
     love.graphics.print("Cash  "..player.money.."$", 580, GLOBALS.scrh - 40)
 
     if player.showCantdo then
-        love.graphics.print("not enough energy or aliveness\n                    or money", 700, 600)
+        love.graphics.print("not enough energy or aliveness\n                    or money", 700, 400)
+    end
+
+    if player.showSuccess then
+        love.graphics.setFont(GLOBALS.fonts.header)
+        love.graphics.print("SUCCESS", GLOBALS.scrw - 280,250)
+        love.graphics.setFont(GLOBALS.fonts.stats)
+    elseif player.showFail then
+        love.graphics.setFont(GLOBALS.fonts.header)
+        love.graphics.print("FAIL", GLOBALS.scrw - 280,250)
+        love.graphics.setFont(GLOBALS.fonts.stats)
     end
     
 end
@@ -51,6 +79,22 @@ function Player:showCant()
     player.cantdotimer = Timer.after(1, function ()
         player.showCantdo = false
     end)
+end
+
+function Player:showResolution(s)
+    
+    if s == 1 then
+        player.showSuccess = true
+        player.successtimer = Timer.after(1, function()
+            player.showSuccess = false
+        end)
+    else
+        player.showFail = true
+        player.successtimer = Timer.after(1, function()
+            player.showFail = false
+        end)
+    end
+
 end
 
 

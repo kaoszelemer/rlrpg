@@ -7,7 +7,7 @@ function Weed:init(x, y)
         y, 
         168,
         64,
-        "Weed",
+        "Weed 5$-",
         love.graphics.newImage('assets/pic/button.png')
     )
 
@@ -29,6 +29,8 @@ function Weed:action()
 
     if player.money >= 5 then
         gameWorldTimeAdjust(1)
+        Button:progressBar(0.1)
+        player:showResolution(1)
         if player.aliveness < 9 then
             player.aliveness = player.aliveness + 2
         else

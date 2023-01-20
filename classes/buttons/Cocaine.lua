@@ -7,7 +7,7 @@ function Cocaine:init(x, y)
         y, 
         168,
         64,
-        "Cocaine",
+        "Cocaine 25$-",
         love.graphics.newImage('assets/pic/button.png')
     )
 
@@ -32,6 +32,7 @@ function Cocaine:action()
         gameWorldTimeAdjust(1)
         if player.aliveness - 4 > 0 then
             player.aliveness = player.aliveness - 4
+            player:showResolution(1)
         else
             player:showCant()
         end

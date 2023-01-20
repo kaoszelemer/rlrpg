@@ -28,6 +28,7 @@ function Sleep:action()
     Button:add("GoOut")
    
     Button:progressBar(0.1)
+    player:showResolution(1)
     
     GLOBALS.gameworldtime = 8
     GLOBALS.gameworlddays = GLOBALS.gameworlddays + 1
