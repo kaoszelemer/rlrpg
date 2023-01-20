@@ -8,7 +8,7 @@ function Pub:init(x, y)
         {0,1,0}, 
         32,
         32,
-        "Progress Bar",
+        "PubicPub",
         "Pub",
         love.graphics.newImage('assets/pic/pub.png')
     )
