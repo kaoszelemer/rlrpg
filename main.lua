@@ -252,7 +252,7 @@ end
 
 function love.load()
  
-    love.window.setMode(GLOBALS.scrw, GLOBALS.scrh)
+  --  love.window.setMode(GLOBALS.scrw, GLOBALS.scrh)
     love.window.setTitle("real life rpg")
     local source = love.audio.newSource('assets/music/maintheme.ogg', 'static')
     local sound = Ripple.newSound(source)
@@ -273,7 +273,7 @@ function love.load()
 end
 
 function love.update(dt)
-    Lurker:scan()
+   Lurker:scan()
   
     for x = 1, GLOBALS.maxtiles do
         for y= 1, GLOBALS.maxtiles do
