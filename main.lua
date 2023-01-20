@@ -3,6 +3,7 @@ Class = require("lib.30log")
 Lurker = require('lib.lurker')
 Bump = require('lib.bump')
 Timer = require('lib.cron')
+Ripple = require('lib.ripple')
 
 --sajat lib
 StateMachine = require('classes.StateMachine')
@@ -253,6 +254,10 @@ function love.load()
  
     love.window.setMode(GLOBALS.scrw, GLOBALS.scrh)
     love.window.setTitle("real life rpg")
+    local source = love.audio.newSource('assets/music/maintheme.ogg', 'static')
+    local sound = Ripple.newSound(source)
+    sound.loop = true
+    local instance = sound:play()
     createMap()
     POIs = {}
     BUTTONS = {}
