@@ -60,6 +60,15 @@ function Explore:action()
         table.remove(HOUSES, pos)
         player:showResolution(1)
     end
+
+    if cityMap.explorationlevel == 60 then
+        local pos = love.math.random(#HOUSES)
+        table.insert(POIs, Busstop(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
+        player.foundcasino = true
+        table.remove(HOUSES, pos)
+        player:showResolution(1)
+    end
+
     if cityMap.explorationlevel > 21 then
         
         local rnd = love.math.random(1,5)
@@ -76,11 +85,7 @@ function Explore:action()
             table.remove(HOUSES, pos)
             player:showResolution(1)
         elseif rnd == 3  and not player.foundcasino then
-            local pos = love.math.random(#HOUSES)
-            table.insert(POIs, Busstop(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
-            player.foundcasino = true
-            table.remove(HOUSES, pos)
-            player:showResolution(1)
+        
         end
 
 
