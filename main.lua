@@ -30,6 +30,9 @@ Pub = require('classes.pois.Pub')
 FriendlyHouse = require('classes.pois.FriendlyHouse')
 Casino = require('classes.pois.Casino')
 Busstop = require('classes.pois.Busstop')
+Cafe = require('classes.pois.Cafe')
+Movie = require('classes.pois.Movie')
+
 
 Character = require('classes.characters.Character')
 Player = require('classes.characters.Player')
@@ -47,6 +50,9 @@ Gamble = require('classes.buttons.Gamble')
 Talk = require('classes.buttons.Talk')
 Ticket = require('classes.buttons.Ticket')
 Suicide = require('classes.buttons.Suicide')
+Coffee = require('classes.buttons.Coffee')
+ActionMovie = require('classes.buttons.ActionMovie')
+Drama = require('classes.buttons.Drama')
 
 cityMap = {}
 

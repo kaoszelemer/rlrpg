@@ -1,22 +1,22 @@
-local Cocaine = Button:extend("Cocaine")
+local Coffee = Button:extend("Coffee")
 
-function Cocaine:init(x, y)
+function Coffee:init(x, y)
     Button.init(
         self, 
         x, 
         y, 
         168,
         64,
-        "Cocaine",
+        "Coffee",
         love.graphics.newImage('assets/pic/button.png'),
-        {e=5,a=5,c=25},
-        "Costs 5$\nives 5 energy on success\nTakes 5 aliveness on fail"
+        {e=2,ef=2,c=10},
+        "Costs 10$\nGives 2 energy"
     )
 
    
 end
 
-function Cocaine:draw()
+function Coffee:draw()
    
     if playerState.state == playerState.states.poiresolution and playerState.state ~= playerState.states.progressing then
         love.graphics.draw(self.img, self.x, self.y)
@@ -30,28 +30,20 @@ function Cocaine:draw()
 
 end
 
-function Cocaine:action()
+function Coffee:action()
  
 
-    print("snorting coke..")
+    print("drinking coffee..")
  
-    if player.money >= 25 then
+    if player.money >= 5 then
         gameWorldTimeAdjust(1)
         Button:progressBar(0.1)
       
-            if love.math.random() > 0.5 then
+           
                 player:showResolution(1)
                 player.energy = player.energy + self.prices.e
       
                 player.money = player.money - self.prices.c
-            else
-                player:showResolution(0)
-                player.money = player.money - self.prices.c
-                player.aliveness = player.aliveness - self.prices.a
-                if player.aliveness <= 0 or player.energy <= 0 then
-                    player:die("You have been given bad cocaine.\n If it doesnt work, why would life?")
-                end
-            end
 
    
     else
@@ -66,4 +58,4 @@ function Cocaine:action()
 
 end
 
-return Cocaine
+return Coffee

@@ -1,0 +1,57 @@
+local Cafe = Poi:extend("Cafe")
+
+function Cafe:init(x, y)
+    Poi.init(
+        self, 
+        x, 
+        y, 
+        {0,1,0}, 
+        32,
+        32,
+        "Energy Cafe",
+        "Cafe",
+        love.graphics.newImage('assets/pic/cafe.png')
+    )
+end
+
+function Cafe:draw()
+
+    love.graphics.draw(self.img, self.x, self.y)
+    if self.panelvisible then
+        love.graphics.setFont(GLOBALS.fonts.header)
+        love.graphics.print(self.name, GLOBALS.scrw - 570, 10)
+        love.graphics.setFont(GLOBALS.fonts.stats)
+
+        if self.nothingpanel then
+            love.graphics.print("A good coffee will give you energy.", GLOBALS.scrw - 570, 150)
+        end
+
+    end
+
+
+end
+
+function Cafe:action()
+
+    print("in Cafe action")
+    --buttons> gamble, exit
+
+     Button:removeall()
+    player.isInCity = false
+    print("dealer action")
+    playerState:changeState(playerState.states.poiresolution)
+    
+    Button:add("Coffee")
+    Button:add("GoOut")
+  
+    self.nothingpanel = true
+
+
+    self.panelvisible = true
+
+
+
+end
+
+
+return Cafe

@@ -87,6 +87,12 @@ function Button:add(item)
         table.insert(BUTTONS, Ticket(x, y))
     elseif item == "Suicide" then
         table.insert(BUTTONS, Suicide(x, y))
+    elseif item == "Coffee" then
+        table.insert(BUTTONS, Coffee(x, y))
+    elseif item == "Drama" then
+        table.insert(BUTTONS, Drama(x, y))
+    elseif item == "ActionMovie" then
+        table.insert(BUTTONS, ActionMovie(x, y))
     end
     print("added "..item.." button")
 end
