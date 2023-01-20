@@ -50,7 +50,7 @@ function Talk:action()
             player.aliveness = player.aliveness - self.prices.a
         end
         if player.aliveness <= 0 or player.energy <= 0 then
-            player:die("You had a fight with your friend and he accidentally stabbed you")
+            player:die("You had a fight with your friend\n and he accidentally stabbed you")
         end
     end
  

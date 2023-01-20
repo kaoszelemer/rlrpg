@@ -49,7 +49,7 @@ function Cocaine:action()
                 player.money = player.money - self.prices.c
                 player.money = player.aliveness - self.prices.a
                 if player.aliveness <= 0 or player.energy <= 0 then
-                    player:die("You have been given bad cocaine. If it doesnt work, why would life?")
+                    player:die("You have been given bad cocaine.\n If it doesnt work, why would life?")
                 end
             end
 

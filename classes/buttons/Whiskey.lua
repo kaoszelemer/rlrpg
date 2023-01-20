@@ -46,7 +46,7 @@ function Whiskey:action()
             player:showResolution(0)
             player.energy = player.aliveness - self.prices.a
             if player.aliveness <= 0 or player.energy <= 0 then
-                player:die("You had a fight with the bartender. You raised your fists, he shot you with his shotgun.")
+                player:die("You had a fight with the bartender. \nYou raised your fists, he shot you with his shotgun.")
             end
         end
     else

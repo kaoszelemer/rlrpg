@@ -44,7 +44,7 @@ function Gamble:action()
             player.money = player.money * 2
             player.aliveness = player.aliveness - self.prices.a
             if player.aliveness <= 0 or player.energy <= 0 then
-                player:die("You've won so much money that you're completely out of the loop\n and there's no point in living any longer")
+                player:die("You've won so much money \nthat you're completely out of the loop\n and there's no point in living any longer")
             end
         else
             player.money = player.money - self.prices.c
