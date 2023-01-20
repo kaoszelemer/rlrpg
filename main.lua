@@ -337,6 +337,8 @@ function love.draw()
             love.graphics.print("You tried to live long enough. Your suffering ended on the "..GLOBALS.deathscreeninfos.day.."st day.", 50, 400)
         elseif GLOBALS.deathscreeninfos.day == 2 then
             love.graphics.print("You tried to live long enough. Your suffering ended on the "..GLOBALS.deathscreeninfos.day.."nd day.", 50, 400)
+        elseif GLOBALS.deathscreeninfos.day == 3 then
+            love.graphics.print("You tried to live long enough. Your suffering ended on the "..GLOBALS.deathscreeninfos.day.."rd day.", 50, 400)
         else
             love.graphics.print("You tried to live long enough. Your suffering ended on the "..GLOBALS.deathscreeninfos.day.."th day.", 50, 400)
         end
