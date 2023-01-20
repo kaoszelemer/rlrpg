@@ -37,6 +37,9 @@ function Explore:action()
     if cityMap.explorationlevel < 100 and player.energy ~= 0 then
         cityMap.explorationlevel = cityMap.explorationlevel + 3
         player.energy = player.energy - self.prices.e
+        if player.aliveness <= 0 or player.energy <= 0 then
+            player:die("You got tired and stepped in front of a bus.")
+        end
     end
 
     if cityMap.explorationlevel == 3 then

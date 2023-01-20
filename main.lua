@@ -306,64 +306,77 @@ end
 
 function love.draw()
 
-    if gameState.state == gameState.states.starting then
-        love.graphics.draw(GLOBALS.fullscreenimages.title, 0,0)
-    end
+    if gameState.state == gameState.states.gameover then
+ 
+        love.graphics.setColor = {1,1,1}
+        love.graphics.setFont(GLOBALS.fonts.header)
+        love.graphics.print("You have died.\nFirstly it was because of life itself.\nBut the real cause was:\n"..GLOBALS.deathscreeninfos.cause, 50, 100)
+        love.graphics.print("You accumulated a lot of money: "..GLOBALS.deathscreeninfos.money, 50, 350)
+        love.graphics.print("You tried to live long enough. Your suffering ended on the "..GLOBALS.deathscreeninfos.day.."th day.", 50, 400)
 
-    if gameState.state == gameState.states.game then
 
-        for x = 1, GLOBALS.maxtiles do
-            for y = 1, GLOBALS.maxtiles do
-
-                love.graphics.draw(cityMap[x][y].img, cityMap[x][y].x * cityMap[x][y].w, cityMap[x][y].y * cityMap[x][y].h)
-
-                if cityMap[x][y].hovered then
+        else
+            if gameState.state == gameState.states.starting then
+                love.graphics.draw(GLOBALS.fullscreenimages.title, 0,0)
+            end
+        
+            if gameState.state == gameState.states.game then
+        
+                for x = 1, GLOBALS.maxtiles do
+                    for y = 1, GLOBALS.maxtiles do
+        
+                        love.graphics.draw(cityMap[x][y].img, cityMap[x][y].x * cityMap[x][y].w, cityMap[x][y].y * cityMap[x][y].h)
+        
+                        if cityMap[x][y].hovered then
+                            love.graphics.setColor(1,0,0)
+                            love.graphics.rectangle("line", (cityMap[x][y].x * cityMap[x][y].w), (cityMap[x][y].y * cityMap[x][y].h), cityMap[x][y].w, cityMap[x][y].h)
+                            love.graphics.setColor(1,1,1)
+                        end
+        
+                    end
+                end
+        
+                for k, v in ipairs(POIs) do
+                    love.graphics.setColor(1,1,1)
+                    v:draw()
+                end
+        
+                love.graphics.setFont(GLOBALS.fonts.header)
+                love.graphics.print(player.name, 10, 0)
+        
+                player:draw()
+        
+        
+        
+                for k, v in ipairs(BUTTONS) do
+                    v:draw()
+                end
+        
+                Button:draw()
+        
+                if playerState.state == playerState.states.city then
+                    love.graphics.setFont(GLOBALS.fonts.header)
+                    love.graphics.print("City", GLOBALS.scrw - 570, 10)
+                    love.graphics.setFont(GLOBALS.fonts.stats)
+                    love.graphics.print("Its your neigborhood.\nCrackhouses all around.\nKinda depressive.", GLOBALS.scrw - 570, 150)
+                    love.graphics.print("Exploration level:"..cityMap.explorationlevel.."%", GLOBALS.scrw - 570, 50)
+                end
+        
+        
+                love.graphics.print("Time\n"..GLOBALS.gameworldtime..":00",GLOBALS.scrw-100, 10)
+                love.graphics.print("Days: "..GLOBALS.gameworlddays, GLOBALS.scrw-100, 52)
+                
+                if player.energy <= 4 then
                     love.graphics.setColor(1,0,0)
-                    love.graphics.rectangle("line", (cityMap[x][y].x * cityMap[x][y].w), (cityMap[x][y].y * cityMap[x][y].h), cityMap[x][y].w, cityMap[x][y].h)
+                    love.graphics.print("LOW ENERGY, find a place to sleep!", GLOBALS.scrw - 570, 100)
+                    love.graphics.setColor(1,1,0)
+                    love.graphics.print("LOW ENERGY, find a place to sleep!", GLOBALS.scrw - 569, 99)
                     love.graphics.setColor(1,1,1)
                 end
-
             end
-        end
-
-        for k, v in ipairs(POIs) do
-            love.graphics.setColor(1,1,1)
-            v:draw()
-        end
-
-        love.graphics.setFont(GLOBALS.fonts.header)
-        love.graphics.print(player.name, 10, 0)
-
-        player:draw()
-
-
-
-        for k, v in ipairs(BUTTONS) do
-            v:draw()
-        end
-
-        Button:draw()
-
-        if playerState.state == playerState.states.city then
-            love.graphics.setFont(GLOBALS.fonts.header)
-            love.graphics.print("City", GLOBALS.scrw - 570, 10)
-            love.graphics.setFont(GLOBALS.fonts.stats)
-            love.graphics.print("Its your neigborhood.\nCrackhouses all around.\nKinda depressive.", GLOBALS.scrw - 570, 150)
-            love.graphics.print("Exploration level:"..cityMap.explorationlevel.."%", GLOBALS.scrw - 570, 50)
-        end
-
-
-        love.graphics.print("Time\n"..GLOBALS.gameworldtime..":00",GLOBALS.scrw-100, 10)
-        love.graphics.print("Days: "..GLOBALS.gameworlddays, GLOBALS.scrw-100, 52)
         
-        if player.energy <= 4 then
-            love.graphics.setColor(1,0,0)
-            love.graphics.print("LOW ENERGY, find a place to sleep!", GLOBALS.scrw - 570, 100)
-            love.graphics.setColor(1,1,0)
-            love.graphics.print("LOW ENERGY, find a place to sleep!", GLOBALS.scrw - 569, 99)
-            love.graphics.setColor(1,1,1)
-        end
     end
 
+  
 
 end

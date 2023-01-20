@@ -42,6 +42,9 @@ function Work:action()
         Button:progressBar(0.05)
         player.energy = player.energy - self.prices.e
         player.aliveness = player.aliveness - self.prices.a
+        if player.aliveness <= 0 or player.energy <= 0 then
+            player:die("You made much more cheese than the others so on the way home your colleagues lynched you")
+        end
  
 
 

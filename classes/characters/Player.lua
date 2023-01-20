@@ -32,6 +32,10 @@ function Player:updatePlayer(dt)
       if self.showSuccess then
         self.successtimer:update(dt)
       end
+
+      
+
+
 end
 
 function Player:draw()
@@ -94,6 +98,19 @@ function Player:showResolution(s)
             player.showFail = false
         end)
     end
+
+end
+
+function Player:die(cause)
+
+    gameState:changeState(gameState.states.gameover)
+    GLOBALS.deathscreeninfos = {
+        cause = cause,
+        time = GLOBALS.gameworldtime,
+        day = GLOBALS.gameworlddays,
+        money = player.money,
+
+    }
 
 end
 

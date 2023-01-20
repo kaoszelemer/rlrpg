@@ -24,7 +24,7 @@ end
 function Suicide:action()
     
 
-    print("you win")
+    player:die("You've ended your miserable life.")
 
     
 

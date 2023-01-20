@@ -44,6 +44,9 @@ function Weed:action()
         else
             player:showResolution(0)
             player.energy = player.energy - self.prices.e
+            if player.aliveness <= 0 or player.energy <= 0 then
+                player:die("You smoked so much that you slipped on a banana peel \nand fell on a sword that stabbed you in the forehead")
+            end
         end
     else
         player:showCant()
