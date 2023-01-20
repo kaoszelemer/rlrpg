@@ -254,8 +254,15 @@ function love.load()
  
   --  love.window.setMode(GLOBALS.scrw, GLOBALS.scrh)
     love.window.setTitle("real life rpg")
-    local source = love.audio.newSource('assets/music/maintheme.ogg', 'static')
-    local sound = Ripple.newSound(source)
+    local mtsource = love.audio.newSource('assets/music/maintheme.ogg', 'static')
+    local mt2source = love.audio.newSource('assets/music/maintheme2.ogg', 'static')
+    local sound
+    if love.math.random() >= 0.5 then
+         sound = Ripple.newSound(mtsource)
+    else
+        sound = Ripple.newSound(mt2source)
+    end
+
     sound.loop = true
     local instance = sound:play()
     createMap()
