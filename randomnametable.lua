@@ -34,7 +34,11 @@ local names = {
         "Kemenes",
         "Procleszmor",
         "Hebreny",
-        "Kiflee"
+        "Kiflee",
+        "Frenki",
+        "Szoknya",
+        "Bibi",
+        "Kaosz"
     },
     {
         "Jonathan",
@@ -59,7 +63,9 @@ local names = {
         "Kokli",
         "Energetika",
         "Zsirizom",
-        "Vrofti"
+        "Vrofti",
+        "Gecmer",
+        "Elemer"
 
 
     }
