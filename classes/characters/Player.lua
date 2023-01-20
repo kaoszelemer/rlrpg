@@ -63,7 +63,7 @@ function Player:draw()
     love.graphics.print("Cash  "..player.money.."$", 580, GLOBALS.scrh - 40)
 
     if player.showCantdo then
-        love.graphics.print("not enough energy or aliveness\n                    or money", 700, 400)
+        love.graphics.print("not enough energy or aliveness\n                    or money", GLOBALS.scrw - 570, 800)
     end
 
     if player.showSuccess then

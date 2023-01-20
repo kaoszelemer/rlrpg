@@ -23,9 +23,7 @@ end
 
 function Suicide:action()
     
-
-    player:die("You've ended your miserable life.")
-
+    gameState:changeState(gameState.states.winscreen)
     
 
 end

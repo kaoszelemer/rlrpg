@@ -44,11 +44,13 @@ function Home:action()
     if GLOBALS.gameworldtime >= 19 or player.energy <= 4 then
         player.todo = 1
         Button:add("Sleep")
+        Button:add("GoOut")
     end
 
     if player.aliveness < 2 then
         player.todo =1
         Button:add("Suicide")
+        Button:add("GoOut")
     end
 
     if player.todo == nil then

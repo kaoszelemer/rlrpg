@@ -46,6 +46,7 @@ Date = require('classes.buttons.Date')
 Gamble = require('classes.buttons.Gamble')
 Talk = require('classes.buttons.Talk')
 Ticket = require('classes.buttons.Ticket')
+Suicide = require('classes.buttons.Suicide')
 
 cityMap = {}
 
