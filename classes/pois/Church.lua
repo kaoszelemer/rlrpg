@@ -1,6 +1,6 @@
-local Movie = Poi:extend("Movie")
+local Church = Poi:extend("Church")
 
-function Movie:init(x, y)
+function Church:init(x, y)
     Poi.init(
         self, 
         x, 
@@ -8,14 +8,14 @@ function Movie:init(x, y)
         {0,1,0}, 
         32,
         32,
-        "Moooovie",
-        "Movie",
-        love.graphics.newImage('assets/pic/movie.png'),
-        love.graphics.newImage('assets/pic/cinemainterior.png')
+        "Church of the carpheadman",
+        "Church",
+        love.graphics.newImage('assets/pic/church.png'),
+        love.graphics.newImage('assets/pic/churchinterior.png')
     )
 end
 
-function Movie:draw()
+function Church:draw()
     if player.isInCity then
         love.graphics.draw(self.img, self.x, self.y)
     end
@@ -25,27 +25,27 @@ function Movie:draw()
         love.graphics.setFont(GLOBALS.fonts.stats)
 
         if self.nothingpanel then
-            love.graphics.print("It's the local movie.\nThey play two shitty movies 24/7\nA drama and an action flick", GLOBALS.scrw - 570, 150)
+            love.graphics.print("It's the church for the carpheadman.\nPreying to this deity\nwill make you feel better.", GLOBALS.scrw - 570, 150)
         end
 
     end
-
-    if player.isInMovie then
+    
+    if player.isInChurch then
         love.graphics.draw(self.interiorimg, 32, 32)
     end
 
+
 end
 
-function Movie:action()
+function Church:action()
 
     Button:removeall()
     player.isInCity = false
-    player.isInMovie = true
-    print("Movie action")
+    player.isInChurch = true
+    print("Church action")
     playerState:changeState(playerState.states.poiresolution)
     
-    Button:add("Drama")
-    Button:add("ActionMovie")
+    Button:add("Pray")
     Button:add("GoOut")
   
     self.nothingpanel = true
@@ -57,4 +57,4 @@ function Movie:action()
 end
 
 
-return Movie
+return Church
