@@ -35,7 +35,7 @@ function Factory:draw()
     if player.isInFactory then
         love.graphics.draw(self.interiorimg, 32, 32)
         for i = 1, self.levelup do
-            love.graphics.rectangle("line", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+            love.graphics.rectangle("line", (GLOBALS.scrw - 300) + i * 10, 20, 10, 10)
         end
         if player.worker >= 1 then
             for i = 1, player.worker do

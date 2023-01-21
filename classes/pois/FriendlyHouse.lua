@@ -8,7 +8,7 @@ function FriendlyHome:init(x, y)
         {0,1,0}, 
         32,
         32,
-        "Your friend lives here",
+        "Friend",
         "FriendlyHome",
         love.graphics.newImage('assets/pic/friendlyhouse.png'),
         love.graphics.newImage('assets/pic/friendlyhomeinterior.png'),
