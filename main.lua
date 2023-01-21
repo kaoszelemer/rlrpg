@@ -34,7 +34,7 @@ Busstop = require('classes.pois.Busstop')
 Cafe = require('classes.pois.Cafe')
 Cinema = require('classes.pois.Cinema')
 Church = require('classes.pois.Church')
-
+FastFood = require('classes.pois.FastFood')
 
 Character = require('classes.characters.Character')
 Player = require('classes.characters.Player')
@@ -56,6 +56,8 @@ Coffee = require('classes.buttons.Coffee')
 ActionMovie = require('classes.buttons.ActionMovie')
 Drama = require('classes.buttons.Drama')
 Pray = require('classes.buttons.Pray')
+Burger = require('classes.buttons.Burger')
+ShitBurger = require('classes.buttons.ShitBurger')
 
 cityMap = {}
 
@@ -345,8 +347,9 @@ function love.draw()
             love.graphics.print("You tried to live long enough. Your suffering ended on the "..GLOBALS.deathscreeninfos.day.."th day.", 50, 400)
         end
 
-        love.graphics.print("Your name was: "..player.name, 50, 550)
-        love.graphics.print("No one will remember you.", 50, 600)
+        love.graphics.print("You explored this shithole city for "..cityMap.explorationlevel.."%")
+        love.graphics.print("Your name was: "..player.name, 50, 600)
+        love.graphics.print("No one will remember you.", 50, 650)
 
 
 

@@ -88,7 +88,7 @@ function Explore:action()
     end
 
     if cityMap.explorationlevel > 51 then
-        local rnd = love.math.random(1,3)
+        local rnd = love.math.random(1,4)
         if rnd == 1  and not player.foundcafe then
             local pos = love.math.random(#HOUSES)
             table.insert(POIs, Cafe(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
@@ -107,7 +107,17 @@ function Explore:action()
             player.foundchurch = true
             table.remove(HOUSES, pos)
             player:showResolution(1)
+        elseif rnd == 4 and not player.foundmeki then
+            local pos = love.math.random(#HOUSES)
+            table.insert(POIs, FastFood(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
+            player.foundmeki = true
+            table.remove(HOUSES, pos)
+            player:showResolution(1)
         end
+    end
+
+    if cityMap.explorationlevel > 91 then
+      
     end
     
 
