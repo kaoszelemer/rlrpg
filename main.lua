@@ -219,8 +219,16 @@ end
 function gameWorldTimeAdjust(time)
     if GLOBALS.gameworldtime < 24 then
         GLOBALS.gameworldtime = GLOBALS.gameworldtime + time
-    else
-        GLOBALS.gameworldtime = 8
+    end
+
+    if GLOBALS.gameworldtime == 24 then
+        GLOBALS.gameworldtime = 0
+        GLOBALS.gameworlddays = GLOBALS.gameworlddays + 1
+    end
+
+    if GLOBALS.gameworldtime > 24 then
+        local mod = (GLOBALS.gameworldtime + time) - 24
+        GLOBALS.gameworldtime = mod
         GLOBALS.gameworlddays = GLOBALS.gameworlddays + 1
     end
 end
@@ -373,6 +381,24 @@ function love.draw()
         
                     end
                 end
+
+                
+                if GLOBALS.gameworldtime >= 19 and GLOBALS.gameworldtime < 23 then
+                    love.graphics.setBlendMode("darken", "premultiplied")
+                    love.graphics.draw(GLOBALS.fullscreenimages.afternoonblend, 32,32)
+                    love.graphics.setBlendMode("alpha")
+                end
+          
+                if GLOBALS.gameworldtime >= 23 or GLOBALS.gameworldtime < 6 then
+                    
+                    love.graphics.setBlendMode("subtract", "premultiplied")
+                    love.graphics.draw(GLOBALS.fullscreenimages.nightblend, 32,32)
+                    love.graphics.setBlendMode("alpha")
+                    love.graphics.setBlendMode("subtract", "premultiplied")
+                    love.graphics.draw(GLOBALS.fullscreenimages.nightblend, 32,32)
+                    love.graphics.setBlendMode("alpha")
+                end
+
         
                 for k, v in ipairs(POIs) do
                     love.graphics.setColor(1,1,1)

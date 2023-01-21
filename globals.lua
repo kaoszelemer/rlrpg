@@ -18,7 +18,9 @@ local globals = {
 
     fullscreenimages = {
         title = love.graphics.newImage('assets/pic/titlescreen.png'),
-        winscreen = love.graphics.newImage('assets/pic/winscreen.png')
+        winscreen = love.graphics.newImage('assets/pic/winscreen.png'),
+        afternoonblend = love.graphics.newImage('assets/pic/afternoonblend.png'),
+        nightblend = love.graphics.newImage('assets/pic/nightblend.png')
     }
     
 
