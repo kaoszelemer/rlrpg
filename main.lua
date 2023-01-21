@@ -153,7 +153,7 @@ local function createMap()
         end
     end
            
-    local rs = love.math.random(1, GLOBALS.maxtiles)
+    local rs = love.math.random(3, GLOBALS.maxtiles-3)
                       
     for x =1, GLOBALS.maxtiles do 
         cityMap[x][rs] = Roadver(x,rs) 
