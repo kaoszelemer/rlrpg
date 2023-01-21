@@ -36,6 +36,17 @@ function Coffee:action()
     print("drinking coffee..")
  
     if player.money >= 5 then
+        player.coffeedrinker = player.coffeedrinker + 1
+
+        for k,v in ipairs(POIs) do
+            if v.name == "Energy Cafe" then
+                if player.coffeedrinker == v.levelup then
+                    player.coffeedrinker = 0
+                    player.lvls.Barista = player.lvls.Barista + 1
+                end
+            end
+        end
+
         gameWorldTimeAdjust(1)
         Button:progressBar(0.1)
       

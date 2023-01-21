@@ -8,10 +8,11 @@ function Church:init(x, y)
         {0,1,0}, 
         32,
         32,
-        "Church of the carpheadman",
+        "Church",
         "Church",
         love.graphics.newImage('assets/pic/church.png'),
-        love.graphics.newImage('assets/pic/churchinterior.png')
+        love.graphics.newImage('assets/pic/churchinterior.png'),
+        30
     )
 end
 
@@ -32,6 +33,14 @@ function Church:draw()
     
     if player.isInChurch then
         love.graphics.draw(self.interiorimg, 32, 32)
+        for i = 1, self.levelup do
+            love.graphics.rectangle("line", (GLOBALS.scrw - 450) + i * 10, 20, 10, 10)
+        end
+        if player.worshipper >= 1 then
+            for i = 1, player.worshipper do
+                love.graphics.rectangle("fill", (GLOBALS.scrw - 450) + i * 10, 20, 10, 10)
+            end
+        end
     end
 
 

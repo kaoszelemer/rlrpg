@@ -35,7 +35,19 @@ function ShitBurger:action()
     if player.money >= 10 then
         gameWorldTimeAdjust(1)
         Button:progressBar(0.1)
-        
+        player.fat = player.fat + 1
+        for k,v in ipairs(POIs) do
+            if v.type == "FastFood" then
+                if player.fat == v.levelup then
+                    player.fat = 0
+                    player.lvls.Fat = player.lvls.Fat + 1
+                    if not player.maxenergy < 1 then
+                        player.maxenergy = player.maxenergy - player.lvls.Fat
+                    end
+                    player.maxenergy = player.maxenergy - player.lvls.Fat
+                end
+            end
+        end
         player.money = player.money - self.prices.c
 
         if love.math.random() > 0.5 then

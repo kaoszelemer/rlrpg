@@ -11,7 +11,8 @@ function Home:init(x, y)
         "Your Home",
         "home",
         love.graphics.newImage('assets/pic/home.png'),
-        love.graphics.newImage('assets/pic/homeinterior.png')
+        love.graphics.newImage('assets/pic/homeinterior.png'),
+        25
     )
 end
 
@@ -32,6 +33,14 @@ function Home:draw()
     
     if player.isInHome then
         love.graphics.draw(self.interiorimg, 32, 32)
+        for i = 1, self.levelup do
+            love.graphics.rectangle("line", (GLOBALS.scrw - 450) + i * 10, 20, 10, 10)
+        end
+        if player.sleeper >= 1 then
+            for i = 1, player.sleeper do
+                love.graphics.rectangle("fill", (GLOBALS.scrw - 450) + i * 10, 20, 10, 10)
+            end
+        end
     end
 
 

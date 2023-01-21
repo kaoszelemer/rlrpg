@@ -33,8 +33,21 @@ function Burger:action()
     print("eating Burger..")
 
     if player.money >= 5 then
+        player.fat = player.fat + 3
         gameWorldTimeAdjust(1)
         Button:progressBar(0.1)
+        for k,v in ipairs(POIs) do
+            if v.type == "FastFood" then
+                if player.fat == v.levelup then
+                    player.fat = 0
+                    player.lvls.Fat = player.lvls.Fat + 1
+                    if not player.maxenergy < 1 then
+                        player.maxenergy = player.maxenergy - player.lvls.Fat
+                    end
+                    player.maxenergy = player.maxenergy - player.lvls.Fat
+                end
+            end
+        end
         
         player.money = player.money - self.prices.c
 

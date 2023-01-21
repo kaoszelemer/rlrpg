@@ -11,7 +11,8 @@ function Pub:init(x, y)
         "PubicPub",
         "Pub",
         love.graphics.newImage('assets/pic/pub.png'),
-        love.graphics.newImage('assets/pic/pubinterior.png')
+        love.graphics.newImage('assets/pic/pubinterior.png'),
+        10
     )
 end
 
@@ -32,6 +33,14 @@ function Pub:draw()
 
     if player.isInPub then
         love.graphics.draw(self.interiorimg, 32, 32)
+        for i = 1, self.levelup do
+            love.graphics.rectangle("line", (GLOBALS.scrw - 450) + i * 10, 20, 10, 10)
+        end
+        if player.drunkie >= 1 then
+            for i = 1, player.drunkie do
+                love.graphics.rectangle("fill", (GLOBALS.scrw - 450) + i * 10, 20, 10, 10)
+            end
+        end
     end
 
 
@@ -50,6 +59,7 @@ function Pub:action()
         Button:add("GoOut")
     else
         Button:add("Whiskey")
+        Button:add("Beer")
         Button:add("Date")
         Button:add("GoOut")
     end

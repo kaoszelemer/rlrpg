@@ -8,10 +8,11 @@ function Cinema:init(x, y)
         {0,1,0}, 
         32,
         32,
-        "Moooovie",
+        "Cinema",
         "Cinema",
         love.graphics.newImage('assets/pic/movie.png'),
-        love.graphics.newImage('assets/pic/cinemainterior.png')
+        love.graphics.newImage('assets/pic/cinemainterior.png'),
+        25
     )
 end
 
@@ -32,6 +33,14 @@ function Cinema:draw()
 
     if player.isInMovie then
         love.graphics.draw(self.interiorimg, 32, 32)
+        for i = 1, self.levelup do
+            love.graphics.rectangle("line", (GLOBALS.scrw - 400) + i * 10, 20, 10, 10)
+        end
+        if player.moviewatcher >= 1 then
+            for i = 1, player.moviewatcher do
+                love.graphics.rectangle("fill", (GLOBALS.scrw - 400) + i * 10, 20, 10, 10)
+            end
+        end
     end
 
 end

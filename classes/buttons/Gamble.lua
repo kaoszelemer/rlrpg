@@ -33,12 +33,24 @@ function Gamble:action()
 
     print("tryn to win a Gamble..")
 
-    local rnd = love.math.random()
-    gameWorldTimeAdjust(1)
-    Button:progressBar(0.1)
+    
     if player.money >= 10 then
+        gameWorldTimeAdjust(1)
+        Button:progressBar(0.1)
+        player.gambler = player.gambler + 1
+
+        for k,v in ipairs(POIs) do
+            if v.name == "Ca$ino" then
+                if player.gambler == v.levelup then
+                    player.gambler = 0
+                    player.lvls.Gambler = player.lvls.Gambler + 1
+                end
+            end
+        end
+
         local rnd = love.math.random()
-        if rnd > 0.9 then
+
+        if rnd > 0.9 - (player.lvls.Gambler / 10) then
             player:showResolution(1)
             player.money = player.money - self.prices.c
             player.money = player.money * 2

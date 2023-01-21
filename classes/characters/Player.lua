@@ -11,9 +11,27 @@ function Player:init()
         firstname.." "..lastname,
         10,
         0,
+        10,
+        10,
         10
+      
 
     )
+
+    self.lvls = {
+        Explorer = 0,
+        Barista = 0,
+        Gambler = 0,
+        Worshipper = 0,
+        Moviewatcher = 0,
+        Junkie = 0,
+        Worker = 0,
+        Fat = 0,
+        Friendliness = 0,
+        Sleeper = 0,
+        Drunkie = 0
+    }
+
 end
 
 function Player:updatePlayer(dt)
@@ -22,11 +40,11 @@ function Player:updatePlayer(dt)
      
       end
     
-      if self.energy > 10 then
-        self.energy = 10
+      if self.energy > self.maxenergy then
+        self.energy = self.maxenergy
       end
-      if self.aliveness > 10 then
-        self.aliveness = 10
+      if self.aliveness > self.maxaliveness then
+        self.aliveness = self.maxaliveness
       end
 
       if self.showSuccess then
@@ -74,6 +92,12 @@ function Player:draw()
         love.graphics.setFont(GLOBALS.fonts.header)
         love.graphics.print("FAIL", GLOBALS.scrw - 550,250)
         love.graphics.setFont(GLOBALS.fonts.stats)
+    end
+
+    for k,v in pairs(self.lvls) do
+      if v >= 1 then
+        love.graphics.print(k.." lvl "..v, GLOBALS.scrw - 180, 500 + #k * 14)
+      end
     end
     
 end

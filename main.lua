@@ -58,6 +58,8 @@ Drama = require('classes.buttons.Drama')
 Pray = require('classes.buttons.Pray')
 Burger = require('classes.buttons.Burger')
 ShitBurger = require('classes.buttons.ShitBurger')
+Beer = require('classes.buttons.Beer')
+Barista = require('classes.buttons.Barista')
 
 cityMap = {}
 
@@ -233,6 +235,26 @@ function gameWorldTimeAdjust(time)
     end
 end
 
+local function initPlayerExperience()
+
+    player.explorer = 0
+    player.friendliness = 0
+    player.moviewatcher = 0
+    player.coffeedrinker = 0
+    player.gambler = 0
+    player.worshipper = 0
+    player.junkie = 0
+    player.worker = 0
+    player.fat = 0
+    player.drunkie = 0
+    player.sexlife = 0
+    player.sleeper = 0
+
+
+
+
+end
+
 function love.mousemoved(x,y)
     GLOBALS.mX = x
     GLOBALS.mY = y
@@ -286,6 +308,9 @@ function love.load()
     cityMap.explorationlevel = 0
 
     player = Player()
+    initPlayerExperience()
+
+
     player.isInCity = true
     
 
@@ -357,7 +382,12 @@ function love.draw()
 
         love.graphics.print("You explored this shithole city for "..cityMap.explorationlevel.."%")
         love.graphics.print("Your name was: "..player.name, 50, 600)
-        love.graphics.print("No one will remember you.", 50, 650)
+
+        if player.lvls.Friendliness < 2 then
+            love.graphics.print("No one will remember you.", 50, 650)
+        else
+            love.graphics.print("Your friend will remember you.", 50, 650)
+        end
 
 
 
@@ -437,6 +467,8 @@ function love.draw()
                     love.graphics.print("LOW ENERGY, find a place to sleep!", GLOBALS.scrw - 569, 99)
                     love.graphics.setColor(1,1,1)
                 end
+
+                
 
 
 

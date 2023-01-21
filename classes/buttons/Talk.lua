@@ -36,7 +36,15 @@ function Talk:action()
   
     gameWorldTimeAdjust(1)
     Button:progressBar(0.1)
-
+    player.friendliness = player.friendliness + 1
+    for k,v in ipairs(POIs) do
+        if v.type == "FriendlyHome" then
+            if player.friendliness == v.levelup then
+                player.friendliness = 0
+                player.lvls.Friendliness = player.lvls.Friendliness + 1
+            end
+        end
+    end
 
     if love.math.random() > 0.5 then
         player:showResolution(1)

@@ -1,7 +1,7 @@
 
 local Poi = Class("Poi")
 
-function Poi:init(x, y, c, w, h, name, type, img, interiorimg)
+function Poi:init(x, y, c, w, h, name, type, img, interiorimg,levelup)
     self.x = x
     self.y = y
     self.c = c
@@ -11,6 +11,7 @@ function Poi:init(x, y, c, w, h, name, type, img, interiorimg)
     self.type = type
     self.img = img
     self.interiorimg = interiorimg
+    self.levelup = levelup
    
     PoiWorld:add(self, self.x, self.y, self.w, self.h)
     self.cadd = true

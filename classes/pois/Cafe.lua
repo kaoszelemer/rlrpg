@@ -11,7 +11,8 @@ function Cafe:init(x, y)
         "Energy Cafe",
         "Cafe",
         love.graphics.newImage('assets/pic/cafe.png'),
-        love.graphics.newImage('assets/pic/cafeinterior.png')
+        love.graphics.newImage('assets/pic/cafeinterior.png'),
+        17
     )
 end
 
@@ -32,7 +33,17 @@ function Cafe:draw()
     
     if player.isInCafe then
         love.graphics.draw(self.interiorimg, 32, 32)
+        for i = 1, self.levelup do
+            love.graphics.rectangle("line", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+        end
+        if player.coffeedrinker >= 1 then
+            for i = 1, player.coffeedrinker do
+                love.graphics.rectangle("fill", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+            end
+        end
     end
+
+ 
 
 
 end
@@ -49,7 +60,11 @@ function Cafe:action()
     playerState:changeState(playerState.states.poiresolution)
     
     Button:add("Coffee")
+    if player.lvls.Barista >= 2 then
+        Button:add("Barista")
+    end
     Button:add("GoOut")
+
   
     self.nothingpanel = true
 

@@ -35,8 +35,18 @@ function Pray:action()
   
         gameWorldTimeAdjust(3)
         Button:progressBar(0.1)
-        
-        player.money = player.money + self.prices.c
+        player.worshipper = player.worshipper + 1
+
+        for k,v in ipairs(POIs) do
+            if v.name == "Church" then
+                if player.worshipper == v.levelup then
+                    player.worshipper = 0
+                    player.lvls.Worshipper = player.lvls.Worshipper + 1
+                end
+            end
+        end
+
+        player.money = player.money + self.prices.c + (player.lvls.Worshipper * 10)
 
         if love.math.random() > 0.5 then
             player.aliveness = player.aliveness - self.prices.a

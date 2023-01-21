@@ -1,51 +1,52 @@
-local Weed = Button:extend("Weed")
+local Beer = Button:extend("Beer")
 
-function Weed:init(x, y)
+function Beer:init(x, y)
     Button.init(
         self, 
         x, 
         y, 
         168,
         64,
-        "Weed",
+        "Beer",
         love.graphics.newImage('assets/pic/button.png'),
-        {e = 2, a = 2, c = 5},
-        "Ordered by the doctor\nGives 2 aliveness on success.\nTakes 2 energy on fail\nCosts 5$"
-    )
+        {e = 1, a = 1, c = 1},
+        "Thick orange liquid\nGives 1 energy on success.\nTakes 1 aliveness on fail\nCosts 1$"
+        )
 
    
 end
 
-function Weed:draw()
+function Beer:draw()
    
     if playerState.state == playerState.states.poiresolution and playerState.state ~= playerState.states.progressing then
         love.graphics.draw(self.img, self.x, self.y)
-        love.graphics.print(self.name, self.x +25, self.y + 25)
+        love.graphics.print(self.name, self.x+25, self.y + 25)
     end
     if self.hovered and playerState.state ~= playerState.states.progressing then
         love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
     end
 end
 
-function Weed:action()
+function Beer:action()
  
 
-    print("smoking pot..")
+    print("drinking Beer..")
+
 
     if player.money >= 5 then
         gameWorldTimeAdjust(1)
         Button:progressBar(0.1)
-        player.junkie = player.junkie + 1
+        player.drunkie = player.drunkie + 1
         
         for k,v in ipairs(POIs) do
-            if v.type == "Dealer" then
-                if player.junkie == v.levelup then
-                    player.junkie = 0
-                    player.lvls.Junkie = player.lvls.Junkie + 1
+            if v.type == "Pub" then
+                if player.drunkie == v.levelup then
+                    player.drunkie = 0
+                    player.lvls.Drunkie = player.lvls.Drunkie + 1
                     if not player.maxaliveness < 1 then
-                        player.maxaliveness = player.maxaliveness - player.lvls.Junkie
+                        player.maxaliveness = player.maxaliveness - player.lvls.Drunkie
                     end
-                    player.aliveness = player.aliveness - player.lvls.Junkie
+                    player.aliveness = player.aliveness - player.lvls.Drunkie
                 end
             end
         end
@@ -54,12 +55,12 @@ function Weed:action()
 
         if love.math.random() > 0.5 then
             player:showResolution(1)
-            player.aliveness = player.aliveness + self.prices.a
+            player.aliveness = player.energy + self.prices.e
         else
             player:showResolution(0)
-            player.energy = player.energy - self.prices.e
+            player.energy = player.aliveness - self.prices.a
             if player.aliveness <= 0 or player.energy <= 0 then
-                player:die("You smoked so much that you slipped on a banana peel \nand fell on a sword that stabbed you in the forehead")
+                player:die("You had a fight with the bartender. \nYou raised your fists, he shot you with his shotgun.")
             end
         end
     else
@@ -76,4 +77,4 @@ function Weed:action()
 
 end
 
-return Weed
+return Beer

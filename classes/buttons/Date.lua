@@ -43,6 +43,7 @@ function Date:action()
             player.energy = 10
             player.aliveness = 10
             player:showResolution(1)
+            player.sexlife = player.sexlife + 1
         else
             player.energy = 1
             player.aliveness = 2

@@ -11,7 +11,8 @@ function FastFood:init(x, y)
         "MrokkDoralds",
         "FastFood",
         love.graphics.newImage('assets/pic/fastfood.png'),
-        love.graphics.newImage('assets/pic/fastfoodinterior.png')
+        love.graphics.newImage('assets/pic/fastfoodinterior.png'),
+        10
     )
 end
 
@@ -32,6 +33,14 @@ function FastFood:draw()
     
     if player.isInFastFood then
         love.graphics.draw(self.interiorimg, 32, 32)
+        for i = 1, self.levelup do
+            love.graphics.rectangle("line", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+        end
+        if player.fat >= 1 then
+            for i = 1, player.fat do
+                love.graphics.rectangle("fill", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+            end
+        end
     end
 
 

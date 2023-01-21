@@ -11,7 +11,8 @@ function Factory:init(x, y)
         "Cheese Factory",
         "Factory",
         love.graphics.newImage('assets/pic/factory.png'),
-        love.graphics.newImage('assets/pic/factoryinterior.png')
+        love.graphics.newImage('assets/pic/factoryinterior.png'),
+        10
     )
 end
 
@@ -33,6 +34,14 @@ function Factory:draw()
     
     if player.isInFactory then
         love.graphics.draw(self.interiorimg, 32, 32)
+        for i = 1, self.levelup do
+            love.graphics.rectangle("line", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+        end
+        if player.worker >= 1 then
+            for i = 1, player.worker do
+                love.graphics.rectangle("fill", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+            end
+        end
     end
 
 end

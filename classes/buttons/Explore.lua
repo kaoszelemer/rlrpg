@@ -13,6 +13,8 @@ function Explore:init(x, y)
         "You begin to search for POIs.\n  Takes 1 Energy\n  Takes 2 Hours"
     )
 
+    self.levelup = 20
+
    
 end
 
@@ -24,6 +26,16 @@ function Explore:draw()
     if self.hovered and playerState.state ~= playerState.states.progressing then
         love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
     end
+
+    for i = 1, self.levelup do
+        love.graphics.rectangle("line", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+    end
+    if player.explorer >= 1 then
+        for i = 1, player.explorer do
+            love.graphics.rectangle("fill", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+        end
+    end
+
 end
 
 function Explore:action()
@@ -34,8 +46,16 @@ function Explore:action()
 
     gameWorldTimeAdjust(2)
 
+   
+
+    player.explorer = player.explorer + 1
+    if player.explorer == self.levelup then
+        player.explorer = 0
+        player.lvls.Explorer = player.lvls.Explorer + 1
+    end
+
     if cityMap.explorationlevel < 100 and player.energy ~= 0 then
-        cityMap.explorationlevel = cityMap.explorationlevel + 3
+        cityMap.explorationlevel = cityMap.explorationlevel + 1 + player.lvls.Explorer
         player.energy = player.energy - self.prices.e
         if player.aliveness <= 0 or player.energy <= 0 then
             player:die("You got tired and stepped in front of a bus.")

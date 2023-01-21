@@ -11,7 +11,8 @@ function Dealer:init(x, y)
         "Drugs Dealer",
         "Dealer",
         love.graphics.newImage('assets/pic/dealer.png'),
-        love.graphics.newImage('assets/pic/dealerinterior.png')
+        love.graphics.newImage('assets/pic/dealerinterior.png'),
+        15
     )
 end
 
@@ -32,6 +33,16 @@ function Dealer:draw()
     
     if player.isInDealer then
         love.graphics.draw(self.interiorimg, 32, 32)
+
+        for i = 1, self.levelup do
+            love.graphics.rectangle("line", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+        end
+        if player.junkie >= 1 then
+            for i = 1, player.junkie do
+                love.graphics.rectangle("fill", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+            end
+        end
+
     end
 
 

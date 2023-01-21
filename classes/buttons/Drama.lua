@@ -34,7 +34,21 @@ function Drama:action()
 
     if player.money >= 13 then
         gameWorldTimeAdjust(3)
+        player.moviewatcher = player.moviewatcher + 5
         Button:progressBar(0.1)
+        
+        for k,v in ipairs(POIs) do
+            if v.name == "Cinema" then
+                if player.moviewatcher == v.levelup then
+                    player.moviewatcher = 0
+                    player.lvls.Moviewatcher = player.lvls.Moviewatcher + 1
+                    if player.maxaliveness > 12 then
+                        player.maxaliveness = player.maxaliveness + 1
+                    end
+                    player.aliveness = player.aliveness + 1
+                end
+            end
+        end
         
         player.money = player.money - self.prices.c
 

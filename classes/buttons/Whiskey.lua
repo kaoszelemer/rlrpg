@@ -36,7 +36,19 @@ function Whiskey:action()
     if player.money >= 5 then
         gameWorldTimeAdjust(1)
         Button:progressBar(0.1)
-        
+        player.drunkie = player.drunkie + 3
+        for k,v in ipairs(POIs) do
+            if v.type == "Pub" then
+                if player.drunkie == v.levelup then
+                    player.drunkie = 0
+                    player.lvls.Drunkie = player.lvls.Drunkie + 1
+                    if not player.maxaliveness < 1 then
+                        player.maxaliveness = player.maxaliveness - player.lvls.Drunkie
+                    end
+                    player.aliveness = player.aliveness - player.lvls.Drunkie
+                end
+            end
+        end
         player.money = player.money - self.prices.c
 
         if love.math.random() > 0.5 then

@@ -37,8 +37,22 @@ function Cocaine:action()
  
     if player.money >= 25 then
         gameWorldTimeAdjust(1)
+        player.junkie = player.junkie + 3
         Button:progressBar(0.1)
-      
+        
+        for k,v in ipairs(POIs) do
+            if v.type == "Dealer" then
+                if player.junkie == v.levelup then
+                    player.junkie = 0
+                    player.lvls.Junkie = player.lvls.Junkie + 1
+                    if not player.maxaliveness < 1 then
+                        player.maxaliveness = player.maxaliveness - player.lvls.Junkie
+                    end
+                    player.aliveness = player.aliveness - player.lvls.Junkie
+                end
+            end
+        end
+
             if love.math.random() > 0.5 then
                 player:showResolution(1)
                 player.energy = player.energy + self.prices.e

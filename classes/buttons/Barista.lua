@@ -1,22 +1,22 @@
-local Work = Button:extend("Work")
+local Barista = Button:extend("Barista")
 
-function Work:init(x, y)
+function Barista:init(x, y)
     Button.init(
         self, 
         x, 
         y, 
         168,
         64,
-        "Work",
+        "Barista",
         love.graphics.newImage('assets/pic/button.png'),
-        {e = 5, c = 18, a = 6, cf = 15},
-        "A place to get money.\nTakes 5 energy.\nTakes 6 aliveness\nGives 18$ on success\nGives 15$ on FAIL"
+        {e = 5, c = 38, a = 3, cf = 35},
+        "You can work here as a Barista.\nTakes 5 energy.\nTakes 3 aliveness\nGives 38$ on success\nGives 35$ on FAIL"
     )
 
    
 end
 
-function Work:draw()
+function Barista:draw()
    
     if playerState.state == playerState.states.poiresolution and playerState.state ~= playerState.states.progressing then
         love.graphics.draw(self.img, self.x, self.y)
@@ -27,32 +27,20 @@ function Work:draw()
     end
 end
 
-function Work:action()
-    print("working hard..")
+function Barista:action()
+    print("Baristaing hard..")
 
         
-      
-        gameWorldTimeAdjust(9)
-        Button:progressBar(0.05)
-        player.worker = player.worker + 1
-
-        for k,v in ipairs(POIs) do
-            if v.type == "Factory" then
-                if player.worker == v.levelup then
-                    player.worker = 0
-                    player.lvls.Worker = player.lvls.Worker + 1
-                end
-            end
-        end
-
         if love.math.random () < 0.7 then
             player:showResolution(1)
-            player.money = player.money + self.prices.c + (player.lvls.Worker * 10)
+            player.money = player.money + self.prices.c
         else
             player:showResolution(0)
-            player.money = player.money + self.prices.cf + (player.lvls.Worker * 10)
+            player.money = player.money + self.prices.cf
         end
-
+        gameWorldTimeAdjust(7)
+        Button:progressBar(0.05)
+        player.worker = player.worker + 1
         player.energy = player.energy - self.prices.e
         player.aliveness = player.aliveness - self.prices.a
         if player.aliveness <= 0 or player.energy <= 0 then
@@ -72,4 +60,4 @@ function Work:action()
 
 end
 
-return Work
+return Barista

@@ -30,21 +30,31 @@ function Sleep:action()
     Button:add("GoOut")
    
     Button:progressBar(0.1)
+    player.sleeper = player.sleeper + 1
+
+    for k,v in ipairs(POIs) do
+        if v.type == "FriendlyHome" then
+            if player.sleeper == v.levelup then
+                player.sleeper = 0
+                player.lvls.Sleeper = player.lvls.Sleeper + 1
+            end
+        end
+    end
 
     if love.math.random() > 0.3 then
     player:showResolution(1)
     
     GLOBALS.gameworldtime = 8
     GLOBALS.gameworlddays = GLOBALS.gameworlddays + 1
-    player.energy = player.energy + 7
-    player.aliveness = player.aliveness + 6
+    player.energy = player.energy + 7 + player.lvls.Sleeper
+    player.aliveness = player.aliveness + 6 + player.lvls.Sleeper
     player.todo = nil
     else
     player:showResolution(0)
     GLOBALS.gameworldtime = 8
     GLOBALS.gameworlddays = GLOBALS.gameworlddays + 1
-    player.energy = player.energy + 3
-    player.aliveness = player.aliveness + 3
+    player.energy = player.energy + 3 + player.lvls.Sleeper
+    player.aliveness = player.aliveness + 3 + player.lvls.Sleeper
     player.todo = nil 
     end
 

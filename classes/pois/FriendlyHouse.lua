@@ -11,7 +11,8 @@ function FriendlyHome:init(x, y)
         "Your friend lives here",
         "FriendlyHome",
         love.graphics.newImage('assets/pic/friendlyhouse.png'),
-        love.graphics.newImage('assets/pic/friendlyhomeinterior.png')
+        love.graphics.newImage('assets/pic/friendlyhomeinterior.png'),
+        20
     )
 end
 
@@ -33,6 +34,14 @@ function FriendlyHome:draw()
     
     if player.isInFh then
         love.graphics.draw(self.interiorimg, 32, 32)
+        for i = 1, self.levelup do
+            love.graphics.rectangle("line", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+        end
+        if player.fat >= 1 then
+            for i = 1, player.fat do
+                love.graphics.rectangle("fill", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+            end
+        end
     end
 
 

@@ -43,7 +43,7 @@ function Busstop:action()
     print("in Busstop action")
     --buttons> gamble, exit
 
-     Button:removeall()
+    Button:removeall()
     player.isInCity = false
     player.isInBusStop = true
     playerState:changeState(playerState.states.poiresolution)
