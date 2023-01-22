@@ -104,7 +104,11 @@ gameState = StateMachine({
     },
     gameover = {
         name = "gameover",
-        transitions = {"gameover", "starting"}
+        transitions = {"gameover", "gameover2"}
+    },
+    gameover2 = {
+        name = "gameover2",
+        transitions = {"gameover2", "starting"}
     },
     settings = {
         name = "settings",
@@ -255,12 +259,51 @@ local function initPlayerExperience()
 
 end
 
+local function newGame()
+    local randomnames = require('randomnametable')
+    local firstname = randomnames[1][love.math.random(1,#randomnames[1])]
+    local lastname = randomnames[2][love.math.random(1,#randomnames[2])]
+
+    createMap()
+    POIs = {}
+    BUTTONS = {}
+    
+    Button:add("Explore")
+    createHomePoi()
+    cityMap.explorationlevel = 0
+    player = Player()
+    player.name = firstname.." "..lastname
+    initPlayerExperience()
+
+
+    player.isInCity = true
+
+    gameState:changeState(gameState.states.starting)
+
+    playerState:changeState(playerState.states.city)
+    player.isInCity = true
+    GLOBALS.gameworlddays = 0
+    GLOBALS.gameworldtime = 8
+
+
+end
+
 function love.mousemoved(x,y)
     GLOBALS.mX = x
     GLOBALS.mY = y
 end
 
 function love.mousereleased()
+    
+    if gameState.state == gameState.states.gameover2 then
+        newGame()
+    end
+
+
+    if gameState.state == gameState.states.gameover then
+        gameState:changeState(gameState.states.gameover2)
+    end
+
 
     if gameState.state == gameState.states.starting then
         gameState:changeState(gameState.states.game)
@@ -282,6 +325,14 @@ function love.mousereleased()
             end
         end
     end
+
+    
+end
+
+function love.keypressed(k)
+    if k == 'escape' then
+       love.event.quit()
+    end
 end
 
 function love.load()
@@ -299,6 +350,8 @@ function love.load()
 
     sound.loop = true
     local instance = sound:play()
+
+
     createMap()
     POIs = {}
     BUTTONS = {}
@@ -306,18 +359,17 @@ function love.load()
     Button:add("Explore")
     createHomePoi()
     cityMap.explorationlevel = 0
-
     player = Player()
     initPlayerExperience()
 
-
     player.isInCity = true
+
     
 
 end
 
 function love.update(dt)
-   Lurker:scan()
+  Lurker:scan()
   
     for x = 1, GLOBALS.maxtiles do
         for y= 1, GLOBALS.maxtiles do
@@ -366,7 +418,7 @@ function love.draw()
 
     if gameState.state == gameState.states.gameover then
  
-        love.graphics.setColor = {1,1,1}
+        love.graphics.setColor(1,1,1)
         love.graphics.setFont(GLOBALS.fonts.header)
         love.graphics.print("You have died.\nFirstly it was because of life itself.\nBut the real cause was:\n"..GLOBALS.deathscreeninfos.cause, 50, 100)
         love.graphics.print("You had this massive ammount of money: "..GLOBALS.deathscreeninfos.money.."$", 50, 350)
@@ -380,16 +432,81 @@ function love.draw()
             love.graphics.print("You tried to live long enough. Your suffering ended on the "..GLOBALS.deathscreeninfos.day.."th day.", 50, 400)
         end
 
-        love.graphics.print("You explored this shithole city for "..cityMap.explorationlevel.."%")
-        love.graphics.print("Your name was: "..player.name, 50, 600)
+        love.graphics.print("Click with mouse to continue", 50, 650)
+      
+
+
+
+    elseif gameState.state == gameState.states.gameover2 then
+
+
+        love.graphics.print("Your name was: "..player.name, 50, 50)
+        love.graphics.print("You explored this shithole city for "..cityMap.explorationlevel.."%",50,100)
 
         if player.lvls.Friendliness < 2 then
-            love.graphics.print("No one will remember you.", 50, 650)
+            love.graphics.print("No one will remember you.", 50, 150)
         else
-            love.graphics.print("Your friend will remember you.", 50, 650)
+            love.graphics.print("Your friend will remember you.", 50, 150)
+        end
+
+        if player.lvls.Barista >= 1 then
+            love.graphics.print("You learned how to make coffee.",50,200)
+        else
+            love.graphics.print("You didn't learned how to make coffee.", 50,200)
         end
 
 
+        if player.lvls.Fat <= 3 then
+            love.graphics.print("You were not really fine dined burgers.",50,250)
+        else
+            love.graphics.print("You were a burger lover. Who doesnt loves shit?", 50,250)
+        end
+
+        if player.lvls.Drunkie > 3 then
+            love.graphics.print("You made life more bearable with booze", 50, 300)
+        else
+            love.graphics.print("You were dry like a desert", 50, 300)
+        end
+
+        if player.lvls.Junkie > 3 then
+            love.graphics.print("You could not cope with reality", 50, 350)
+        else
+            love.graphics.print("You realised it's easier if you aren't a junkie", 50, 350)
+        end
+
+        if player.lvls.Gambler > 3 then
+            love.graphics.print("You should play the lottery", 50, 400)
+        else
+            love.graphics.print("You shouldnt play the lottery", 50, 400)
+        end
+
+        if player.lvls.Moviewatcher > 2 then
+            love.graphics.print("You cried and vomited a lot watching those flicks", 50, 450)
+        else
+            love.graphics.print("You dont care about nurses and soldiers", 50, 450)
+        end
+
+        if player.lvls.Sleeper > 5 then
+            love.graphics.print("You've slept enough", 50, 500)
+        else
+            love.graphics.print("You haven't slept enough", 50, 500)
+        end
+
+        if player.lvls.Worker > 3 then
+            love.graphics.print("You worked hard, but that wasn't enough", 50, 550)
+        else
+            love.graphics.print("You shit on work, dont you love capitalism?", 50, 550)
+        end
+
+        if player.lvls.Worshipper > 3 then
+            love.graphics.print("You worshipped the carpheadman enough, to meet him in the otherworld", 50, 600)
+        else
+            love.graphics.print("You should worship the carpheadman more. It is the God.", 50, 600)
+        end
+
+        love.graphics.setColor(1,1,0)
+        love.graphics.print("CLICK to RESTART - ESC to QUIT", 100,700)
+        love.graphics.setColor(1,1,1)
 
     else
             if gameState.state == gameState.states.starting then
