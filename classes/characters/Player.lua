@@ -60,6 +60,9 @@ function Player:updatePlayer(dt)
       if self.showSuccess then
         self.successtimer:update(dt)
       end
+      if self.showFail then
+        self.failtimer:update(dt)
+      end
 
       
       
@@ -140,7 +143,7 @@ function Player:showResolution(s)
     else
         player.showFail = true
         local instance = Sounds.boo:play()
-        player.successtimer = Timer.after(1, function()
+        player.failtimer = Timer.after(1, function()
             player.showFail = false
         end)
     end

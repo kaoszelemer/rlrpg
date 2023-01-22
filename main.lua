@@ -335,10 +335,12 @@ function love.mousereleased()
                 end
             end
         end
-        for k,v in ipairs(BUTTONS) do
-            if v.hovered then
-                print(v.name, "action")
-                v:action()
+        if playerState.state ~= playerState.states.progressing then
+            for k,v in ipairs(BUTTONS) do
+                if v.hovered then
+                    print(v.name, "action")
+                    v:action()
+                end
             end
         end
     end
