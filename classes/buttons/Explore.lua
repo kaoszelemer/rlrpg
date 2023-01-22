@@ -10,7 +10,7 @@ function Explore:init(x, y)
         "Explore",
         love.graphics.newImage('assets/pic/button.png'),
         {e = 2, a = 0},
-        "You begin to search for POIs.\nTakes 2 Energy"
+        "Look around.\nTakes 2 Energy"
     )
 
     self.levelup = 20
@@ -20,11 +20,16 @@ end
 
 function Explore:draw()
     if playerState.state == playerState.states.city and playerState.state ~= playerState.states.progressing then
+        love.graphics.setColor(1,1,1)
         love.graphics.draw(self.img, self.x, self.y)
+        love.graphics.setColor(GLOBALS.colors.white)
         love.graphics.print(self.name, self.x + 25, self.y + 25)
     end
     if self.hovered and playerState.state ~= playerState.states.progressing then
-        love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+        love.graphics.setColor(GLOBALS.colors.darkgrey)
+        love.graphics.rectangle("fill", GLOBALS.mX + 10, GLOBALS.mY - 60, 200,60)
+        love.graphics.setColor(GLOBALS.colors.white)
+        love.graphics.print(self.hovertext, GLOBALS.mX + 15, GLOBALS.mY- 55)
         if player.energy - self.prices.e <= 0 or player.aliveness - self.prices.a <= 0 then
             love.graphics.setColor(1,1,0)
             love.graphics.print("You may die", self.x + 15, self.y + 38)
@@ -33,13 +38,19 @@ function Explore:draw()
     end
 
     for i = 1, self.levelup do
-        love.graphics.rectangle("line", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+        love.graphics.setColor(GLOBALS.colors.white)
+        love.graphics.rectangle("line", (GLOBALS.scrw - 330) + i * 10, 222, 10, 10)
     end
     if player.explorer >= 1 then
         for i = 1, player.explorer do
-            love.graphics.rectangle("fill", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+            love.graphics.setColor(GLOBALS.colors.yellow)
+            love.graphics.rectangle("fill", (GLOBALS.scrw - 330) + i * 10, 222, 10, 10)
+            love.graphics.setColor(GLOBALS.colors.white)
         end
     end
+
+    love.graphics.print("Exploration", GLOBALS.scrw-320, 202)
+    
 
 end
 
@@ -86,10 +97,10 @@ function Explore:action()
         player:showResolution(1)
     end
 
-    if cityMap.explorationlevel == 90 then
+    if cityMap.explorationlevel >= 90 and player.foundbus ~= true then
         local pos = love.math.random(#HOUSES)
         table.insert(POIs, Busstop(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
-        player.foundcasino = true
+        player.foundbus = true
         table.remove(HOUSES, pos)
         player:showResolution(1)
     end

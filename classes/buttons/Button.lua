@@ -19,7 +19,7 @@ function Button:draw()
 
     if self.showprogress then
         
-        love.graphics.setColor(1,1,1)
+        love.graphics.setColor(GLOBALS.colors.white)
         love.graphics.print("Doing selected action", 720, 560)
         love.graphics.rectangle("fill", 700, 600, self.progress, 20)
        
@@ -52,14 +52,14 @@ end
 
 
 function Button:add(item)
-    local x = GLOBALS.scrw-580
+    local x = GLOBALS.scrw-540
     local y
 
     if #BUTTONS > 0 then
         y = BUTTONS[#BUTTONS].y + 80
     else
         
-        y = 250
+        y = 340
     end
 
 
@@ -91,7 +91,7 @@ function Button:add(item)
         table.insert(BUTTONS, Coffee(x, y))
     elseif item == "Drama" then
         table.insert(BUTTONS, Drama(x, y))
-    elseif item == "ActionMovie" then
+    elseif item == "Action movie" then
         table.insert(BUTTONS, ActionMovie(x, y))
     elseif item == "Pray" then
         table.insert(BUTTONS, Pray(x, y))

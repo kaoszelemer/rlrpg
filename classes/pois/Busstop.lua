@@ -8,7 +8,7 @@ function Busstop:init(x, y)
         {0,1,0}, 
         32,
         32,
-        "Travel to Arizome",
+        "Travel\nto Arizome",
         "Busstop",
         love.graphics.newImage('assets/pic/busstop.png'),
         love.graphics.newImage('assets/pic/businterior.png')
@@ -22,11 +22,11 @@ function Busstop:draw()
     end
     if self.panelvisible then
         love.graphics.setFont(GLOBALS.fonts.header)
-        love.graphics.print(self.name, GLOBALS.scrw - 570, 10)
+        love.graphics.print(self.name, GLOBALS.scrw - 570, 32)
         love.graphics.setFont(GLOBALS.fonts.stats)
 
         if self.nothingpanel then
-            love.graphics.print("A cheap ticket to salvation", GLOBALS.scrw - 570, 150)
+            love.graphics.print("A cheap ticket\nto salvation", GLOBALS.scrw - 570, 182)
         end
 
     end
@@ -34,8 +34,6 @@ function Busstop:draw()
     if player.isInBusStop then
         love.graphics.draw(self.interiorimg, 32, 32)
     end
-
-
 end
 
 function Busstop:action()

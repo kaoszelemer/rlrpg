@@ -22,26 +22,14 @@ function FastFood:draw()
     end
     if self.panelvisible then
         love.graphics.setFont(GLOBALS.fonts.header)
-        love.graphics.print(self.name, GLOBALS.scrw - 570, 10)
+        love.graphics.print(self.name, GLOBALS.scrw - 570, 32)
         love.graphics.setFont(GLOBALS.fonts.stats)
 
         if self.nothingpanel then
-            love.graphics.print("Burgerz and shitburgerz.\nChoose wisely!", GLOBALS.scrw - 570, 150)
+            love.graphics.print("Burgerz and shitburgerz.\nChoose wisely!", GLOBALS.scrw - 570, 182)
         end
 
     end
-    
---[[     if player.isInFastFood then
-        love.graphics.draw(self.interiorimg, 32, 32)
-        for i = 1, self.levelup do
-            love.graphics.rectangle("line", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
-        end
-        if player.fat >= 1 then
-            for i = 1, player.fat do
-                love.graphics.rectangle("fill", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
-            end
-        end
-    end ]]
 
 
 end

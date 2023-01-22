@@ -100,7 +100,11 @@ gameState = StateMachine({
     },
     game = {
         name = "game",
-        transitions = {"game", "winscreen", "gameover", "settings"}
+        transitions = {"game", "winscreen", "gameover", "settings", "passout"}
+    },
+    passout = {
+        name = "passout",
+        transitions = {"game", "passout"}
     },
     winscreen = {
         name = "winscreen",
@@ -305,6 +309,13 @@ function love.mousereleased()
         newGame()
     end
 
+    if gameState.state == gameState.states.passout then
+        Home:action()
+        playerState:changeState(playerState.states.poiresolution)
+        gameState:changeState(gameState.states.game)
+
+    end
+
 
     if gameState.state == gameState.states.gameover then
         gameState:changeState(gameState.states.gameover2)
@@ -342,7 +353,7 @@ function love.keypressed(k)
 end
 
 function love.load()
- 
+    love.graphics.setBackgroundColor(22/255,7/255,18/255)
   --  love.window.setMode(GLOBALS.scrw, GLOBALS.scrh)
     love.window.setTitle("real life rpg")
     local mtsource = love.audio.newSource('assets/music/maintheme.ogg', 'static')
@@ -426,7 +437,7 @@ function love.draw()
 
     if gameState.state == gameState.states.gameover then
  
-        love.graphics.setColor(1,1,1)
+        love.graphics.setColor(GLOBALS.colors.white)
         love.graphics.setFont(GLOBALS.fonts.header)
         love.graphics.print("You have died.\nFirstly it was because of life itself.\nBut the real cause was:\n"..GLOBALS.deathscreeninfos.cause, 50, 100)
         love.graphics.print("You had this massive ammount of money: "..GLOBALS.deathscreeninfos.money.."$", 50, 350)
@@ -516,6 +527,16 @@ function love.draw()
         love.graphics.print("CLICK to RESTART - ESC to QUIT", 100,700)
         love.graphics.setColor(1,1,1)
 
+    elseif gameState.state == gameState.states.passout then
+
+        love.graphics.setFont(GLOBALS.fonts.header)
+        love.graphics.print("You passed out", 500, 300)
+       
+        love.graphics.print("2 days have passed. You almost died, you better watch out!", 122, 400)
+        love.graphics.print("Click with mouse to continue", 400, 600)
+        love.graphics.setFont(GLOBALS.fonts.stats)
+
+
     else
             if gameState.state == gameState.states.starting then
                 love.graphics.draw(GLOBALS.fullscreenimages.title, 0,0)
@@ -525,7 +546,7 @@ function love.draw()
         
                 for x = 1, GLOBALS.maxtiles do
                     for y = 1, GLOBALS.maxtiles do
-        
+                        love.graphics.setColor(1,1,1)
                         love.graphics.draw(cityMap[x][y].img, cityMap[x][y].x * cityMap[x][y].w, cityMap[x][y].y * cityMap[x][y].h)
         
                         if cityMap[x][y].hovered then
@@ -548,7 +569,6 @@ function love.draw()
                     
                     love.graphics.setBlendMode("subtract", "premultiplied")
                     love.graphics.draw(GLOBALS.fullscreenimages.nightblend, 32,32)
-                    love.graphics.setBlendMode("alpha")
                     love.graphics.setBlendMode("subtract", "premultiplied")
                     love.graphics.draw(GLOBALS.fullscreenimages.nightblend, 32,32)
                     love.graphics.setBlendMode("alpha")
@@ -560,8 +580,12 @@ function love.draw()
                     v:draw()
                 end
         
-                love.graphics.setFont(GLOBALS.fonts.header)
-                love.graphics.print(player.name, 32, 0)
+                love.graphics.draw(GLOBALS.uielements.chbg, GLOBALS.scrw - 330, 291)
+                love.graphics.setFont(GLOBALS.fonts.stats)
+                love.graphics.print("Your Character", GLOBALS.scrw - 310,310)
+                love.graphics.print(player.name, GLOBALS.scrw - 310, 340)
+                love.graphics.print(player.age.." years old", GLOBALS.scrw - 310, 360)
+                love.graphics.print(player.sex, GLOBALS.scrw - 310, 380)
         
                 player:draw()
         
@@ -572,29 +596,33 @@ function love.draw()
                 end
         
                 Button:draw()
-        
+                
+
+
                 if playerState.state == playerState.states.city then
+                   
                     love.graphics.setFont(GLOBALS.fonts.header)
-                    love.graphics.print("City", GLOBALS.scrw - 570, 10)
+                    love.graphics.print("City", GLOBALS.scrw - 570, 32)
                     love.graphics.setFont(GLOBALS.fonts.stats)
-                    love.graphics.print("Its your neigborhood.\nCrackhouses all around.\nKinda depressive.", GLOBALS.scrw - 570, 150)
-                    love.graphics.print("Exploration level:"..cityMap.explorationlevel.."%", GLOBALS.scrw - 570, 50)
+                    love.graphics.print("Its your neigborhood.\nCrackhouses all around.\nKinda depressive.", GLOBALS.scrw - 570, 182)
+                    love.graphics.print("Exploration level:"..cityMap.explorationlevel.."%", GLOBALS.scrw - 570, 82)
                 end
         
         
-                love.graphics.print("Time\n"..GLOBALS.gameworldtime..":00",GLOBALS.scrw-100, 10)
-                love.graphics.print("Days: "..GLOBALS.gameworlddays, GLOBALS.scrw-100, 52)
+                love.graphics.print("Time:\n"..GLOBALS.gameworldtime..":00",GLOBALS.scrw - 140, 32)
+                love.graphics.print("Days:\n"..GLOBALS.gameworlddays, GLOBALS.scrw-80, 32)
+                love.graphics.print("Cash:\n"..player.money.."$", GLOBALS.scrw-200, 32)
                 
                 if player.energy <= 4 then
                     love.graphics.setColor(1,0,0)
-                    love.graphics.print("LOW ENERGY, find a place to sleep!", GLOBALS.scrw - 570, 100)
+                    love.graphics.print("LOW ENERGY!!!\nFind a place to sleep!", GLOBALS.scrw - 570, 132)
                     love.graphics.setColor(1,1,0)
-                    love.graphics.print("LOW ENERGY, find a place to sleep!", GLOBALS.scrw - 569, 99)
+                    love.graphics.print("LOW ENERGY!!!\nFind a place to sleep!", GLOBALS.scrw - 569, 131)
                     love.graphics.setColor(1,1,1)
                 end
 
 
-                love.graphics.print("Level up progress", GLOBALS.scrw-320, 40)
+                love.graphics.print("Level up progress", GLOBALS.scrw-320, 182)
 
                 
 

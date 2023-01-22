@@ -10,7 +10,7 @@ function Train:init(x, y)
         "Train",
         love.graphics.newImage('assets/pic/button.png'),
         {f = 3, cf = 1, c = 30, a= 0, e = 3},
-        "Sweat and blood smeared over the walls\nTakes 3 fat on success.\nTakes 1 fat on fail\nCosts 30$\nTakes 3 Energy"
+        "Sweat and blood\nTakes 3 fat on success.\nTakes 1 fat on fail\nCosts 30$\nTakes 3 Energy"
     )
 
    
@@ -19,15 +19,20 @@ end
 function Train:draw()
    
     if playerState.state == playerState.states.poiresolution and playerState.state ~= playerState.states.progressing then
+        love.graphics.setColor(1,1,1)
         love.graphics.draw(self.img, self.x, self.y)
+        love.graphics.setColor(GLOBALS.colors.white)
         love.graphics.print(self.name, self.x +25, self.y + 25)
     end
     if self.hovered and playerState.state ~= playerState.states.progressing then
-        love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+        love.graphics.setColor(GLOBALS.colors.darkgrey)
+        love.graphics.rectangle("fill", GLOBALS.mX + 10, GLOBALS.mY - 60, 300,120)
+        love.graphics.setColor(GLOBALS.colors.white)
+        love.graphics.print(self.hovertext, GLOBALS.mX + 15, GLOBALS.mY- 55)
         if player.energy - self.prices.e <= 0 or player.aliveness - self.prices.a <= 0 then
             love.graphics.setColor(1,1,0)
             love.graphics.print("You may die", self.x + 15, self.y + 38)
-            love.graphics.setColor(1,1,1)
+            love.graphics.setColor(GLOBALS.colors.white)
         end
     end
 end

@@ -19,13 +19,19 @@ end
 function Cocaine:draw()
    
     if playerState.state == playerState.states.poiresolution and playerState.state ~= playerState.states.progressing then
+        love.graphics.setColor(1,1,1)
         love.graphics.draw(self.img, self.x, self.y)
+        love.graphics.setColor(GLOBALS.colors.white)
         love.graphics.print(self.name, self.x + 25, self.y + 25)
+        
     end
 
     
     if self.hovered then
-        love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+        love.graphics.setColor(GLOBALS.colors.darkgrey)
+        love.graphics.rectangle("fill", GLOBALS.mX + 10, GLOBALS.mY - 60, 250,80)
+        love.graphics.setColor(GLOBALS.colors.white)
+        love.graphics.print(self.hovertext, GLOBALS.mX + 15, GLOBALS.mY- 55)
         if player.aliveness - self.prices.a <= 0 then
             love.graphics.setColor(1,1,0)
             love.graphics.print("You may die", self.x + 15, self.y + 38)

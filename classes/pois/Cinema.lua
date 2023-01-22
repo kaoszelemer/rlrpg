@@ -22,11 +22,11 @@ function Cinema:draw()
     end
     if self.panelvisible then
         love.graphics.setFont(GLOBALS.fonts.header)
-        love.graphics.print(self.name, GLOBALS.scrw - 570, 10)
+        love.graphics.print(self.name, GLOBALS.scrw - 570, 32)
         love.graphics.setFont(GLOBALS.fonts.stats)
 
         if self.nothingpanel then
-            love.graphics.print("It's the local Cinema.\nThey play two shitty movies 24/7\nA drama and an action flick", GLOBALS.scrw - 570, 150)
+            love.graphics.print("It's the local Cinema.\nThey play two shitty movies 24/7\nA drama and an action flick", GLOBALS.scrw - 570, 182)
         end
 
     end
@@ -34,13 +34,15 @@ function Cinema:draw()
     if player.isInMovie then
         love.graphics.draw(self.interiorimg, 32, 32)
         for i = 1, self.levelup do
-            love.graphics.rectangle("line", (GLOBALS.scrw - 400) + i * 10, 20, 10, 10)
+            love.graphics.rectangle("line", (GLOBALS.scrw - 330) + i * 10, 222, 10, 10)
         end
         if player.moviewatcher >= 1 then
             for i = 1, player.moviewatcher do
-                love.graphics.rectangle("fill", (GLOBALS.scrw - 400) + i * 10, 20, 10, 10)
+                love.graphics.rectangle("fill", (GLOBALS.scrw - 330) + i * 10, 222, 10, 10)
             end
         end
+    
+        love.graphics.print("Nurses and Soldiers", GLOBALS.scrw-320, 202)
     end
 
 end

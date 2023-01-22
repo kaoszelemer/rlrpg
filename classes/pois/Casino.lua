@@ -22,11 +22,11 @@ function Casino:draw()
     end
     if self.panelvisible then
         love.graphics.setFont(GLOBALS.fonts.header)
-        love.graphics.print(self.name, GLOBALS.scrw - 570, 10)
+        love.graphics.print(self.name, GLOBALS.scrw - 570, 32)
         love.graphics.setFont(GLOBALS.fonts.stats)
 
         if self.nothingpanel then
-            love.graphics.print("A place where you can spend\nyour hard earned money.", GLOBALS.scrw - 570, 150)
+            love.graphics.print("A place where you can spend\nyour hard earned money.", GLOBALS.scrw - 570, 182)
         end
 
     end
@@ -34,13 +34,15 @@ function Casino:draw()
     if player.isInCasino then
         love.graphics.draw(self.interiorimg, 32, 32)
         for i = 1, self.levelup do
-            love.graphics.rectangle("line", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+            love.graphics.rectangle("line", (GLOBALS.scrw - 330) + i * 10, 222, 10, 10)
         end
         if player.gambler >= 1 then
             for i = 1, player.gambler do
-                love.graphics.rectangle("fill", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
+                love.graphics.rectangle("fill", (GLOBALS.scrw - 330) + i * 10, 222, 10, 10)
             end
         end
+    
+        love.graphics.print("Gambling", GLOBALS.scrw-320, 202)
     end
 
 

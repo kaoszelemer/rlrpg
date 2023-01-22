@@ -32,6 +32,16 @@ function Player:init()
         Drunkie = 0
     }
 
+    self.age = love.math.random(18,62)
+    local rnd = love.math.random(1,3)
+    if rnd == 1 then
+        self.sex = "He/Him"
+    elseif rnd == 2 then
+        self.sex = "She/Her"
+    elseif rnd == 3 then
+        self.sex = "They/Them"
+    end
+
 end
 
 function Player:updatePlayer(dt)
@@ -59,27 +69,29 @@ end
 
 function Player:draw()
     --energy
-    love.graphics.setFont(GLOBALS.fonts.stats)
-    love.graphics.print("Energy:", 20, GLOBALS.scrh - 40)
+    love.graphics.setColor(GLOBALS.colors.white)
+    love.graphics.setFont(GLOBALS.fonts.header)
+
+    love.graphics.print("Energy:", 222, GLOBALS.scrh - 100)
 
     for i = 1, self.energy do
-        love.graphics.rectangle("fill", (16 * i)+ 72, GLOBALS.scrh - 40, 12, 12)
-        love.graphics.setColor(0,1,0)
-        love.graphics.rectangle("line", (16 * i)+ 72, GLOBALS.scrh - 40, 13, 13)
-        love.graphics.setColor(1,1,1)
+        love.graphics.setColor(GLOBALS.colors.red)
+        love.graphics.rectangle("fill", (42 * i), GLOBALS.scrh - 60, 38, 38)
+        love.graphics.setColor(GLOBALS.colors.white)
+    end
+
+
+    love.graphics.print("Aliveness:", 860, GLOBALS.scrh - 100)
+
+    for i = 1, self.aliveness do
+   
+        love.graphics.setColor(GLOBALS.colors.green)
+        love.graphics.rectangle("fill", (42 * i)+ 652, GLOBALS.scrh - 60, 38, 38)
+        love.graphics.setColor(GLOBALS.colors.white)
     end
 
     love.graphics.setFont(GLOBALS.fonts.stats)
-    love.graphics.print("Aliveness:", 300, GLOBALS.scrh - 40)
-
-    for i = 1, self.aliveness do
-        love.graphics.rectangle("fill", (16 * i)+ 372, GLOBALS.scrh - 40, 12, 12)
-        love.graphics.setColor(1,1,0)
-        love.graphics.rectangle("line", (16 * i)+ 372, GLOBALS.scrh - 40, 13, 13)
-        love.graphics.setColor(1,1,1)
-    end
-
-    love.graphics.print("Cash  "..player.money.."$", 580, GLOBALS.scrh - 40)
+ 
 
     if player.showCantdo then
         love.graphics.print("not enough money", GLOBALS.scrw - 570, 600)
@@ -97,11 +109,14 @@ function Player:draw()
 
     for k,v in pairs(self.lvls) do
       if v >= 1 and k ~= "Fat" then
-        love.graphics.print(k.." lvl "..v, GLOBALS.scrw - 180, 500 + #k * 14)
-      end
+        love.graphics.setColor(GLOBALS.colors.white)
+        love.graphics.print(k.." lvl "..v, GLOBALS.scrw - 310, 360 + #k * 14)
+        love.graphics.setColor(1,1,1)
+    end
       if k == "Fat" then
-        love.graphics.print(k.." lvl "..v.."kg", GLOBALS.scrw - 180, 500 + #k * 14)
-    
+        love.graphics.setColor(GLOBALS.colors.white)
+        love.graphics.print("Weight: "..v.."kg", GLOBALS.scrw - 310, 360 + #k * 14)
+        love.graphics.setColor(1,1,1)
       end
     end
     
@@ -134,14 +149,26 @@ end
 
 function Player:die(cause)
 
-    gameState:changeState(gameState.states.gameover)
-    GLOBALS.deathscreeninfos = {
-        cause = cause,
-        time = GLOBALS.gameworldtime,
-        day = GLOBALS.gameworlddays,
-        money = player.money,
+    if love.math.random() > 0.6 then
+        player.energy = 3
+        player.aliveness = 3
+        GLOBALS.gameworldtime = 8
+        GLOBALS.gameworlddays = GLOBALS.gameworlddays + 2
+        gameState:changeState(gameState.states.passout)
 
-    }
+    else
+        gameState:changeState(gameState.states.gameover)
+        GLOBALS.deathscreeninfos = {
+            cause = cause,
+            time = GLOBALS.gameworldtime,
+            day = GLOBALS.gameworlddays,
+            money = player.money,
+    
+        }
+    end
+
+
+   
 
 end
 
