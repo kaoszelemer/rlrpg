@@ -9,11 +9,11 @@ function Player:init()
     Character.init(
         self, 
         firstname.." "..lastname,
-        13,
-        500,
-        13,
-        13,
-        13
+        10,
+        2,
+        10,
+        10,
+        10
       
 
     )
