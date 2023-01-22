@@ -107,7 +107,7 @@ function Explore:action()
 
     if cityMap.explorationlevel > 21 then
         
-        local rnd = love.math.random(1,6)
+        local rnd = love.math.random(1,4)
         if rnd == 1 and not player.foundfriendlyhome then
             local pos = love.math.random(#HOUSES)
             table.insert(POIs, FriendlyHouse(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
@@ -124,7 +124,7 @@ function Explore:action()
     end
 
     if cityMap.explorationlevel > 41 then
-        local rnd = love.math.random(1,13)
+        local rnd = love.math.random(1,7)
         if rnd == 1  and not player.foundcafe then
             local pos = love.math.random(#HOUSES)
             table.insert(POIs, Cafe(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
