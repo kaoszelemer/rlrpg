@@ -35,7 +35,7 @@ end
 function Barista:action()
     print("Baristaing hard..")
 
-        
+    
         if love.math.random () < 0.7 then
             player:showResolution(1)
      
@@ -45,7 +45,8 @@ function Barista:action()
             player.money = player.money + self.prices.cf
         end
         gameWorldTimeAdjust(7)
-        Button:progressBar(0.05)
+        Button:progressBar(3.5)
+        local s = Sounds.barista:play()
         player.worker = player.worker + 1
         player.energy = player.energy - self.prices.e
         player.aliveness = player.aliveness - self.prices.a

@@ -39,7 +39,8 @@ function Pray:action()
 
   
         gameWorldTimeAdjust(3)
-        Button:progressBar(0.1)
+        Button:progressBar(3)
+        local s = Sounds.pray:play()
         player.worshipper = player.worshipper + 1
 
         for k,v in ipairs(POIs) do

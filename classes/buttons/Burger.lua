@@ -40,8 +40,8 @@ function Burger:action()
     if player.money >= 5 then
         player.fat = player.fat + 3
         gameWorldTimeAdjust(1)
-        Button:progressBar(0.1)
-      
+        Button:progressBar(1)
+        local s = Sounds.burger:play()
         player.lvls.Fat = player.lvls.Fat + 1
 
         if player.lvls.Fat > 88 then

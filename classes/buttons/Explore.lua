@@ -46,11 +46,11 @@ end
 function Explore:action()
     print("exploring..")
 
-    Button:progressBar(0.1)
+    Button:progressBar(2)
     
 
     gameWorldTimeAdjust(2)
-
+    local s = Sounds.explore:play()
    
 
     player.explorer = player.explorer + 1

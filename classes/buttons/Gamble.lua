@@ -41,7 +41,8 @@ function Gamble:action()
     
     if player.money >= 10 then
         gameWorldTimeAdjust(1)
-        Button:progressBar(0.1)
+        Button:progressBar(1)
+        local s = Sounds.gamble:play()
         player.gambler = player.gambler + 1
 
         for k,v in ipairs(POIs) do

@@ -39,7 +39,8 @@ function ActionMovie:action()
 
     if player.money >= 13 then
         gameWorldTimeAdjust(3)
-        Button:progressBar(0.1)
+        Button:progressBar(3)
+        local s = Sounds.actionmovie:play()
         player.moviewatcher = player.moviewatcher + 1
 
         for k,v in ipairs(POIs) do

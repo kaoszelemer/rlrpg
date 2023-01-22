@@ -40,9 +40,9 @@ function Train:action()
     if player.money >= self.prices.c then     
 
         player.fat = player.fat + 3
-        gameWorldTimeAdjust(1)
-        Button:progressBar(0.1)
-        
+        gameWorldTimeAdjust(2)
+        Button:progressBar(2)
+        local s = Sounds.train:play()
         player.energy = player.energy - self.prices.e
 
         if player.energy <= 0 then

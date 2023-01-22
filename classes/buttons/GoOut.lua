@@ -35,6 +35,7 @@ function GoOut:action()
             v.panelvisible = false
         end
     end
+    local s = Sounds.goout:play()
 
    -- Button:progressBar(0.05)
   

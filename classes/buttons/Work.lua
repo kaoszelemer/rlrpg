@@ -38,7 +38,8 @@ function Work:action()
         
       
         gameWorldTimeAdjust(9)
-        Button:progressBar(0.05)
+        Button:progressBar(4.5)
+        local s = Sounds.work:play()
         player.worker = player.worker + 1
 
         for k,v in ipairs(POIs) do

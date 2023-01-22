@@ -39,8 +39,9 @@ function Talk:action()
     print("talking with friend..")
 
   
-    gameWorldTimeAdjust(1)
-    Button:progressBar(0.1)
+    gameWorldTimeAdjust(4)
+    Button:progressBar(4)
+    local s = Sounds.talk:play()
     player.friendliness = player.friendliness + 1
     for k,v in ipairs(POIs) do
         if v.type == "FriendlyHome" then

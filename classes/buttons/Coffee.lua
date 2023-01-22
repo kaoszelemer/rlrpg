@@ -48,8 +48,8 @@ function Coffee:action()
         end
 
         gameWorldTimeAdjust(1)
-        Button:progressBar(0.1)
-      
+        Button:progressBar(1)
+        local s = Sounds.coffee:play()
            
                 player:showResolution(1)
                 player.energy = player.energy + self.prices.e

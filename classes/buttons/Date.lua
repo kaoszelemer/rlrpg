@@ -36,9 +36,9 @@ function Date:action()
 
     local rnd = love.math.random()
     gameWorldTimeAdjust(3)
-    Button:progressBar(0.1)
-  
-    if player.energy > 3 and player.aliveness > 2 then
+    Button:progressBar(3)
+    local s = Sounds.date:play()
+   
         if rnd < 0.18 then
             player.energy = 10
             player.aliveness = 10
@@ -49,9 +49,7 @@ function Date:action()
             player.aliveness = 2
             player:showResolution(0)
         end
-    else
-        player:showCant()
-    end
+ 
  
    
     

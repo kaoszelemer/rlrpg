@@ -40,7 +40,8 @@ function Drama:action()
     if player.money >= 13 then
         gameWorldTimeAdjust(3)
         player.moviewatcher = player.moviewatcher + 5
-        Button:progressBar(0.1)
+        Button:progressBar(3)
+        local s = Sounds.drama:play()
         
         for k,v in ipairs(POIs) do
             if v.name == "Cinema" then

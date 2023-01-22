@@ -43,8 +43,8 @@ function Cocaine:action()
     if player.money >= 25 then
         gameWorldTimeAdjust(1)
         player.junkie = player.junkie + 3
-        Button:progressBar(0.1)
-        
+        Button:progressBar(1)
+        local s = Sounds.cocaine:play()
         for k,v in ipairs(POIs) do
             if v.type == "Dealer" then
                 if player.junkie == v.levelup then

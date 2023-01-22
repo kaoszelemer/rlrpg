@@ -29,7 +29,8 @@ function Sleep:action()
     Button:removeall()
     Button:add("GoOut")
    
-    Button:progressBar(0.1)
+    Button:progressBar(4)
+    local s = Sounds.sleep:play()
     player.sleeper = player.sleeper + 1
 
     for k,v in ipairs(POIs) do

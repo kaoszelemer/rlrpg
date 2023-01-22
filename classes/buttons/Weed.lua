@@ -39,7 +39,8 @@ function Weed:action()
 
     if player.money >= 5 then
         gameWorldTimeAdjust(1)
-        Button:progressBar(0.1)
+        Button:progressBar(1)
+        local s = Sounds.weed:play()
         player.junkie = player.junkie + 1
         
         for k,v in ipairs(POIs) do

@@ -111,7 +111,7 @@ end
 
 function Button:update(dt)
     if self.showprogress then
-        self.progress = self.progress + self.progresslength / dt
+        self.progress = (self.progress) + (1 /(self.progresslength*25)) / dt
         self.progresstime:update(dt)
         
     end
@@ -130,7 +130,7 @@ function Button:progressBar(length)
 
     self.showprogress = true
     self.progresslength = length
-    self.progresstime = Timer.after(1, function ()  
+    self.progresstime = Timer.after(length, function ()  
       self.showprogress = false
         if player.isInCity then
             playerState:changeState(playerState.states.city)
