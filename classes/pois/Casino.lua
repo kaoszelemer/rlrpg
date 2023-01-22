@@ -54,6 +54,7 @@ function Casino:action()
      Button:removeall()
     player.isInCity = false
     player.isInCasino = true
+    local s = Sounds.casino:play()
     print("dealer action")
     playerState:changeState(playerState.states.poiresolution)
     

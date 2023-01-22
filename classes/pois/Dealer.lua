@@ -53,6 +53,7 @@ function Dealer:action()
     Button:removeall()
     player.isInCity = false
     player.isInDealer = true
+    local s = Sounds.dealer:play()
     print("dealer action")
     playerState:changeState(playerState.states.poiresolution)
     

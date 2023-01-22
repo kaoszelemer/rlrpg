@@ -56,6 +56,7 @@ function Gym:action()
     Button:removeall()
     player.isInCity = false
     player.isInGym = true
+    local s = Sounds.gym:play()
     playerState:changeState(playerState.states.poiresolution)
     
     Button:add("Train")

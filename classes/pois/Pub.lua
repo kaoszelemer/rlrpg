@@ -51,6 +51,7 @@ function Pub:action()
     Button:removeall()
     player.isInCity = false
     player.isInPub = true
+    local s = Sounds.pub:play()
     print("Pub action")
     playerState:changeState(playerState.states.poiresolution)
     

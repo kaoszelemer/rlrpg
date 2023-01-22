@@ -55,6 +55,7 @@ function FriendlyHome:action()
     Button:removeall()
     player.isInCity = false
     player.isInFh = true
+    local s = Sounds.friendlyhome:play()
     playerState:changeState(playerState.states.poiresolution)
     
     Button:add("Talk")

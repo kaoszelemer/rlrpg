@@ -51,6 +51,7 @@ function FastFood:action()
     Button:removeall()
     player.isInCity = false
     player.isInFastFood = true
+    local s = Sounds.fastfood:play()
     print("FastFood action")
     playerState:changeState(playerState.states.poiresolution)
     

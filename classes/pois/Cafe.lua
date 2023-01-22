@@ -56,6 +56,7 @@ function Cafe:action()
      Button:removeall()
     player.isInCity = false
     player.isInCafe = true
+    local s = Sounds.cafe:play()
     print("dealer action")
     playerState:changeState(playerState.states.poiresolution)
     

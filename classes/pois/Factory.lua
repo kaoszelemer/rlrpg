@@ -51,6 +51,7 @@ function Factory:action()
     print("action")
     player.isInCity = false
     player.isInFactory = true
+    local s = Sounds.factory:play()
     Button:removeall()
     
    

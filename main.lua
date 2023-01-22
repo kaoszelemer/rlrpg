@@ -10,7 +10,8 @@ StateMachine = require('classes.StateMachine')
 
 
 
---offset
+--assets
+Sounds = require("sounds")
 
 
 
@@ -295,6 +296,8 @@ function love.mousemoved(x,y)
 end
 
 function love.mousereleased()
+
+    local instance = Sounds.click:play()
     
     if gameState.state == gameState.states.gameover2 then
         newGame()

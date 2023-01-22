@@ -38,6 +38,7 @@ function Barista:action()
         
         if love.math.random () < 0.7 then
             player:showResolution(1)
+     
             player.money = player.money + self.prices.c
         else
             player:showResolution(0)

@@ -51,6 +51,7 @@ function Church:action()
     Button:removeall()
     player.isInCity = false
     player.isInChurch = true
+    local s = Sounds.church:play()
     print("Church action")
     playerState:changeState(playerState.states.poiresolution)
     

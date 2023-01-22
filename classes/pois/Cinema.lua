@@ -50,6 +50,7 @@ function Cinema:action()
     Button:removeall()
     player.isInCity = false
     player.isInMovie = true
+    local s = Sounds.cinema:play()
     print("Cinema action")
     playerState:changeState(playerState.states.poiresolution)
     

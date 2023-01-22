@@ -46,6 +46,7 @@ function Busstop:action()
     Button:removeall()
     player.isInCity = false
     player.isInBusStop = true
+    local s = Sounds.busstop:play()
     playerState:changeState(playerState.states.poiresolution)
     
     Button:add("Ticket")

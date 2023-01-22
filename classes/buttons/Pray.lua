@@ -54,9 +54,11 @@ function Pray:action()
         player.money = player.money + self.prices.c + (player.lvls.Worshipper * 10)
 
         if love.math.random() > 0.5 then
-            player.aliveness = player.aliveness - self.prices.a
-        else
+            player:showResolution(1)
             player.aliveness = player.aliveness + self.prices.a
+        else
+            player:showResolution(0)
+            player.aliveness = player.aliveness - self.prices.a
         end
      
         if player.aliveness <= 0 or player.energy <= 0 then

@@ -118,11 +118,13 @@ function Player:showResolution(s)
     
     if s == 1 then
         player.showSuccess = true
+        local instance = Sounds.applause:play()
         player.successtimer = Timer.after(1, function()
             player.showSuccess = false
         end)
     else
         player.showFail = true
+        local instance = Sounds.boo:play()
         player.successtimer = Timer.after(1, function()
             player.showFail = false
         end)
