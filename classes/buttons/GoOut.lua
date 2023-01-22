@@ -43,9 +43,11 @@ function GoOut:action()
     player.isInCity = true
     playerState:changeState(playerState.states.city)
 
-    if cityMap.explorationlevel <= 100 then
+    if cityMap.explorationlevel < 100 then
        Button:add("Explore")
     end
+
+    Button:add("Wait")
 
     player.isInCafe = false
     player.isInBusStop = false

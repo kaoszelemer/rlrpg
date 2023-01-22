@@ -63,6 +63,7 @@ ShitBurger = require('classes.buttons.ShitBurger')
 Beer = require('classes.buttons.Beer')
 Barista = require('classes.buttons.Barista')
 Train = require('classes.buttons.Train')
+Wait = require('classes.buttons.Wait')
 
 cityMap = {}
 
@@ -271,6 +272,7 @@ local function newGame()
     BUTTONS = {}
     
     Button:add("Explore")
+    Button:add("Wait")
     createHomePoi()
     cityMap.explorationlevel = 0
     player = Player()
@@ -361,6 +363,7 @@ function love.load()
     BUTTONS = {}
     
     Button:add("Explore")
+    Button:add("Wait")
     createHomePoi()
     cityMap.explorationlevel = 0
     player = Player()
@@ -405,6 +408,7 @@ function love.update(dt)
 
   if playerState.state == playerState.states.city and #BUTTONS == 0 then
     Button:add("Explore")
+    Button:add("Wait")
     player.isInCity = true
   end
 

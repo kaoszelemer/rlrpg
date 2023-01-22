@@ -105,6 +105,8 @@ function Button:add(item)
         table.insert(BUTTONS, Barista(x, y))
     elseif item == "Train" then
         table.insert(BUTTONS, Train(x, y))
+    elseif item == "Wait" then
+        table.insert(BUTTONS, Wait(x, y))
     end
     print("added "..item.." button")
 end

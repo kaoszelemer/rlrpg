@@ -58,7 +58,7 @@ function Home:action()
   
     playerState:changeState(playerState.states.poiresolution)
 
-    if GLOBALS.gameworldtime >= 19 or player.energy <= 4 then
+    if GLOBALS.gameworldtime >= 19 or player.energy <= 4  or GLOBALS.gameworldtime <= 6 then
         player.todo = 1
         Button:add("Sleep")
         Button:add("GoOut")
