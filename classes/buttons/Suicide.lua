@@ -37,7 +37,7 @@ end
 function Suicide:action()
     
     
-    gameState:changeState(gameState.states.winscreen)
+    plazer:die("You ended your life.")
     
 
 end
