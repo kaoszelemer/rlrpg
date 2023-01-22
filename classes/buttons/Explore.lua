@@ -9,8 +9,8 @@ function Explore:init(x, y)
         64,
         "Explore",
         love.graphics.newImage('assets/pic/button.png'),
-        {e = 1, a = 0},
-        "You begin to search for POIs.\n  Takes 1 Energy\n  Takes 2 Hours"
+        {e = 2, a = 0},
+        "You begin to search for POIs.\nTakes 2 Energy"
     )
 
     self.levelup = 20
@@ -96,7 +96,7 @@ function Explore:action()
 
     if cityMap.explorationlevel > 21 then
         
-        local rnd = love.math.random(1,2)
+        local rnd = love.math.random(1,6)
         if rnd == 1 and not player.foundfriendlyhome then
             local pos = love.math.random(#HOUSES)
             table.insert(POIs, FriendlyHouse(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
@@ -113,7 +113,7 @@ function Explore:action()
     end
 
     if cityMap.explorationlevel > 1 then
-        local rnd = love.math.random(1,8)
+        local rnd = love.math.random(1,15)
         if rnd == 1  and not player.foundcafe then
             local pos = love.math.random(#HOUSES)
             table.insert(POIs, Cafe(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
@@ -138,13 +138,68 @@ function Explore:action()
             player.foundmeki = true
             table.remove(HOUSES, pos)
             player:showResolution(1)
-        elseif rnd == 4 and not player.foundgym then
+        elseif rnd == 5 and not player.foundgym then
             local pos = love.math.random(#HOUSES)
             table.insert(POIs, Gym(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
             player.foundgym = true
             table.remove(HOUSES, pos)
             player:showResolution(1)
         end
+    end
+
+    if cityMap.explorationlevel >= 100 then
+        cityMap.explorationlevel = 100
+        if player.foundcasino ~= true then
+            local pos = love.math.random(#HOUSES)
+            table.insert(POIs, Casino(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
+            player.foundcasino = true
+            table.remove(HOUSES, pos)
+            player:showResolution(1)
+        end
+        if player.foundfriendlyhome ~= true then
+            local pos = love.math.random(#HOUSES)
+            table.insert(POIs, FriendlyHouse(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
+            player.foundfriendlyhome = true
+            table.remove(HOUSES, pos)
+            player:showResolution(1)
+        end
+
+        if not player.foundcafe then
+            local pos = love.math.random(#HOUSES)
+            table.insert(POIs, Cafe(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
+            player.foundcafe = true
+            table.remove(HOUSES, pos)
+            player:showResolution(1)
+        end
+        if not player.foundmovie then
+            local pos = love.math.random(#HOUSES)
+            table.insert(POIs, Cinema(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
+            player.foundmovie = true
+            table.remove(HOUSES, pos)
+            player:showResolution(1)
+        end
+        if not player.foundchurch then
+            local pos = love.math.random(#HOUSES)
+            table.insert(POIs, Church(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
+            player.foundchurch = true
+            table.remove(HOUSES, pos)
+            player:showResolution(1)
+        end
+        if not player.foundmeki then
+            local pos = love.math.random(#HOUSES)
+            table.insert(POIs, FastFood(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
+            player.foundmeki = true
+            table.remove(HOUSES, pos)
+            player:showResolution(1)
+        end
+        if not player.foundgym then
+            local pos = love.math.random(#HOUSES)
+            table.insert(POIs, Gym(HOUSES[pos].x * 32, HOUSES[pos].y * 32))
+            player.foundgym = true
+            table.remove(HOUSES, pos)
+            player:showResolution(1)
+        end
+
     end
 
    
