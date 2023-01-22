@@ -593,6 +593,9 @@ function love.draw()
                     love.graphics.setColor(1,1,1)
                 end
 
+
+                love.graphics.print("Level up progress", GLOBALS.scrw-320, 40)
+
                 
 
 

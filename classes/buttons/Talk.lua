@@ -58,7 +58,7 @@ function Talk:action()
         player.aliveness = player.aliveness + self.prices.a
     else
         player:showResolution(0)
-        if love.math.random() > 0.4 then
+        if love.math.random() > 0.5 then
             player.energy = player.energy - self.prices.e
         else
             player.aliveness = player.aliveness - self.prices.a
