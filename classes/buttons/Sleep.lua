@@ -21,6 +21,10 @@ function Sleep:draw()
         love.graphics.draw(self.img, self.x, self.y)
         love.graphics.print(self.name, self.x +25, self.y + 25)
     end
+    if self.hovered and playerState.state ~= playerState.states.progressing then
+        love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+    end
+
 end
 
 function Sleep:action()
