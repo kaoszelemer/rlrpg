@@ -9,7 +9,7 @@ function Drama:init(x, y)
         64,
         "Watch Drama",
         love.graphics.newImage('assets/pic/button.png'),
-        {e = 2, a = 2, c = 13},
+        {e = 0, a = 2, c = 13},
         "A shitty movie about a nurse\nfalling in love with a soldier\nTakes 1 aliveness\nCosts 13$"
     )
 
@@ -24,6 +24,11 @@ function Drama:draw()
     end
     if self.hovered and playerState.state ~= playerState.states.progressing then
         love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+        if player.energy - self.prices.e <= 0 or player.aliveness - self.prices.a <= 0 then
+            love.graphics.setColor(1,1,0)
+            love.graphics.print("You may die", self.x + 15, self.y + 38)
+            love.graphics.setColor(1,1,1)
+        end
     end
 end
 

@@ -10,7 +10,7 @@ function Cocaine:init(x, y)
         "Cocaine",
         love.graphics.newImage('assets/pic/button.png'),
         {e=5,a=5,c=25},
-        "Costs 5$\nives 5 energy on success\nTakes 5 aliveness on fail"
+        "Costs 5$\nGives 5 energy on success\nTakes 5 aliveness on fail"
     )
 
    
@@ -26,6 +26,11 @@ function Cocaine:draw()
     
     if self.hovered then
         love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+        if player.aliveness - self.prices.a <= 0 then
+            love.graphics.setColor(1,1,0)
+            love.graphics.print("You may die", self.x + 15, self.y + 38)
+            love.graphics.setColor(1,1,1)
+        end
     end
 
 end

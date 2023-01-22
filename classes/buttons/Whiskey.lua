@@ -24,6 +24,11 @@ function Whiskey:draw()
     end
     if self.hovered and playerState.state ~= playerState.states.progressing then
         love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+        if player.aliveness - self.prices.a <= 0 then
+            love.graphics.setColor(1,1,0)
+            love.graphics.print("You may die", self.x + 15, self.y + 38)
+            love.graphics.setColor(1,1,1)
+        end
     end
 end
 
@@ -53,10 +58,10 @@ function Whiskey:action()
 
         if love.math.random() > 0.5 then
             player:showResolution(1)
-            player.aliveness = player.energy + self.prices.e
+            player.energy = player.energy + self.prices.e
         else
             player:showResolution(0)
-            player.energy = player.aliveness - self.prices.a
+            player.aliveness = player.aliveness - self.prices.a
             if player.aliveness <= 0 or player.energy <= 0 then
                 player:die("You had a fight with the bartender. \nYou raised your fists, he shot you with his shotgun.")
             end

@@ -24,6 +24,11 @@ function Burger:draw()
     end
     if self.hovered and playerState.state ~= playerState.states.progressing then
         love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+        if  player.aliveness - self.prices.a <= 0 then
+            love.graphics.setColor(1,1,0)
+            love.graphics.print("You may die", self.x + 15, self.y + 38)
+            love.graphics.setColor(1,1,1)
+        end
     end
 end
 

@@ -9,8 +9,8 @@ function Train:init(x, y)
         64,
         "Train",
         love.graphics.newImage('assets/pic/button.png'),
-        {f = 3, cf = 1, c = 30},
-        "Sweat and blood smeared over the walls\nTakes 3 fat on success.\nTakes 1 fat on fail\nCosts 30$"
+        {f = 3, cf = 1, c = 30, a= 0, e = 3},
+        "Sweat and blood smeared over the walls\nTakes 3 fat on success.\nTakes 1 fat on fail\nCosts 30$\nTakes 3 Energy"
     )
 
    
@@ -24,6 +24,11 @@ function Train:draw()
     end
     if self.hovered and playerState.state ~= playerState.states.progressing then
         love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+        if player.energy - self.prices.e <= 0 or player.aliveness - self.prices.a <= 0 then
+            love.graphics.setColor(1,1,0)
+            love.graphics.print("You may die", self.x + 15, self.y + 38)
+            love.graphics.setColor(1,1,1)
+        end
     end
 end
 
@@ -37,6 +42,12 @@ function Train:action()
         player.fat = player.fat + 3
         gameWorldTimeAdjust(1)
         Button:progressBar(0.1)
+        
+        player.energy = player.energy - self.prices.e
+
+        if player.energy <= 0 then
+            player:die("You trained so hard\nthe 100kg weight fell down on your neck while brenchpressing.")
+        end
 
         player.money = player.money - self.prices.c
 

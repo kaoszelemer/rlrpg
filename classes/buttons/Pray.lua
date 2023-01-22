@@ -9,7 +9,7 @@ function Pray:init(x, y)
         64,
         "Pray",
         love.graphics.newImage('assets/pic/button.png'),
-        {e = 2, a = 2, c = 1},
+        {e = 0, a = 2, c = 1},
         "Sell your soul to the carpheadman\nGives 1$\nGives 2 aliveness on success\nTakes 2 aliveness on fail"
     )
 
@@ -24,6 +24,11 @@ function Pray:draw()
     end
     if self.hovered and playerState.state ~= playerState.states.progressing then
         love.graphics.print(self.hovertext, GLOBALS.mX + 100, GLOBALS.mY)
+        if player.energy - self.prices.e <= 0 or player.aliveness - self.prices.a <= 0 then
+            love.graphics.setColor(1,1,0)
+            love.graphics.print("You may die", self.x + 15, self.y + 38)
+            love.graphics.setColor(1,1,1)
+        end
     end
 end
 
