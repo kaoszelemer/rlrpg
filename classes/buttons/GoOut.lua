@@ -58,6 +58,7 @@ function GoOut:action()
     player.isInHome = false
     player.isInChurch = false
     player.isInFastFood = false
+    player.isInGym = false
 
     
 

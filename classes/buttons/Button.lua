@@ -42,7 +42,7 @@ function Button:removeall()
             if v.cadd ~= false then
                 v.cadd = false
                 MenuWorld:remove(v)
-                print("removed "..v.name)
+                print("removed "..v.name.." button")
             end
         end
         BUTTONS = {}
@@ -103,6 +103,8 @@ function Button:add(item)
         table.insert(BUTTONS, Beer(x, y))
     elseif item == "Barista" then
         table.insert(BUTTONS, Barista(x, y))
+    elseif item == "Train" then
+        table.insert(BUTTONS, Train(x, y))
     end
     print("added "..item.." button")
 end

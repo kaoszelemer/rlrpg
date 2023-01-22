@@ -31,7 +31,7 @@ function FastFood:draw()
 
     end
     
-    if player.isInFastFood then
+--[[     if player.isInFastFood then
         love.graphics.draw(self.interiorimg, 32, 32)
         for i = 1, self.levelup do
             love.graphics.rectangle("line", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
@@ -41,7 +41,7 @@ function FastFood:draw()
                 love.graphics.rectangle("fill", (GLOBALS.scrw - 350) + i * 10, 20, 10, 10)
             end
         end
-    end
+    end ]]
 
 
 end

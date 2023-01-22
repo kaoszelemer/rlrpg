@@ -9,11 +9,11 @@ function Player:init()
     Character.init(
         self, 
         firstname.." "..lastname,
-        10,
-        0,
-        10,
-        10,
-        10
+        13,
+        500,
+        13,
+        13,
+        13
       
 
     )
@@ -26,7 +26,7 @@ function Player:init()
         Moviewatcher = 0,
         Junkie = 0,
         Worker = 0,
-        Fat = 0,
+        Fat = love.math.random(79,82),
         Friendliness = 0,
         Sleeper = 0,
         Drunkie = 0
@@ -51,6 +51,7 @@ function Player:updatePlayer(dt)
         self.successtimer:update(dt)
       end
 
+      
       
 
 
@@ -95,8 +96,12 @@ function Player:draw()
     end
 
     for k,v in pairs(self.lvls) do
-      if v >= 1 then
+      if v >= 1 and k ~= "Fat" then
         love.graphics.print(k.." lvl "..v, GLOBALS.scrw - 180, 500 + #k * 14)
+      end
+      if k == "Fat" then
+        love.graphics.print(k.." lvl "..v.."kg", GLOBALS.scrw - 180, 500 + #k * 14)
+    
       end
     end
     

@@ -35,6 +35,7 @@ Cafe = require('classes.pois.Cafe')
 Cinema = require('classes.pois.Cinema')
 Church = require('classes.pois.Church')
 FastFood = require('classes.pois.FastFood')
+Gym = require('classes.pois.Gym')
 
 Character = require('classes.characters.Character')
 Player = require('classes.characters.Player')
@@ -60,6 +61,7 @@ Burger = require('classes.buttons.Burger')
 ShitBurger = require('classes.buttons.ShitBurger')
 Beer = require('classes.buttons.Beer')
 Barista = require('classes.buttons.Barista')
+Train = require('classes.buttons.Train')
 
 cityMap = {}
 
@@ -186,7 +188,6 @@ local function createMap()
 
 
 end 
-
 
 local function createHomePoi()
 
@@ -456,7 +457,7 @@ function love.draw()
         end
 
 
-        if player.lvls.Fat <= 3 then
+        if player.lvls.Fat <= 90 then
             love.graphics.print("You were not really fine dined burgers.",50,250)
         else
             love.graphics.print("You were a burger lover. Who doesnt loves shit?", 50,250)
