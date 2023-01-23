@@ -37,7 +37,7 @@ end
 function Suicide:action()
     
     
-    plazer:die("You ended your life.")
+    player:die("You ended your life.")
     
 
 end
